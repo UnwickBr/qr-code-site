@@ -2,37 +2,45 @@
 <html lang="pt-br">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>QR Code Redirect</title>
   <style>
     body {
       background-color: #000;
+      color: #ffffff;
       font-family: Arial, Helvetica, sans-serif;
-      text-shadow: 5px 5px 10px #fff;
-      font-style: normal;
       text-align: center;
-      padding-top: 50px;
-      color: #ffff
+      padding: 30px 20px;
+      margin: 0;
     }
+
     h2 {
-    color: #ff6a00;
-    text-shadow: 0 0 5px #ff6a00, 0 0 10px #ff6a00, 0 0 20px #ff4500;
-    animation: pulsar 1.5s infinite alternate;
+      color: #ff0000;
+      font-size: 1.8rem;
+      margin-bottom: 20px;
+      text-shadow: 0 0 5px #ff0000, 0 0 10px #ff0000, 0 0 20px #ff0000;
+      animation: pulsar 1.5s infinite alternate;
+    }
+
+    img {
+      width: 80%;
+      max-width: 250px;
+      height: auto;
+      border-radius: 12px;
     }
 
     @keyframes pulsar {
-    from {
-        text-shadow: 0 0 5px #ff6a00, 0 0 10px #ff6a00, 0 0 20px #ff4500;
+      from {
+        text-shadow: 0 0 5px #ff0000, 0 0 10px #ff0000, 0 0 20px #ff0000;
+      }
+      to {
+        text-shadow: 0 0 15px #ff0000, 0 0 30px #ff0000, 0 0 40px #ff0000;
+      }
     }
-    to {
-        text-shadow: 0 0 15px #ffa500, 0 0 30px #ff4500, 0 0 40px #ff0000;
-    }
-    }
-
   </style>
-  </body>
 </head>
 <body>
   <h2>Escaneie o QR Code Abaixo</h2>
-  <img src="https://api.qrserver.com/v1/create-qr-code/?data=https://unwickbr.github.io/qr-code-site/hello.html&size=200x200" alt="QR Code">
+  <img src="https://api.qrserver.com/v1/create-qr-code/?data=https://unwickbr.github.io/qr-code-site/hello.html&size=200x200" alt="QR para hello.html">
 </body>
 </html>
