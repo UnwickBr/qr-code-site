@@ -1,10 +1,62 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
   <meta charset="UTF-8">
-  <title>Hello World</title>
+  <title>Chuva de Corações</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      overflow: hidden;
+      background: linear-gradient(to top, #141218, #8b004f);
+    }
+
+    .heart {
+      position: absolute;
+      font-size: 24px;
+      animation: float 8s linear infinite;
+      opacity: 0.8;
+      color: #fff;
+    }
+
+    @keyframes float {
+      0% {
+        transform: translateY(100vh) scale(1);
+        opacity: 0;
+      }
+      50% {
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(-10vh) scale(1.5);
+        opacity: 0;
+      }
+    }
+  </style>
 </head>
 <body>
-  <h1>Hello World</h1>
+  <!-- Música -->
+  <audio autoplay loop>
+    <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+  </audio>
+
+  <!-- JavaScript para gerar corações -->
+  <script>
+    const emojis = ["💖", "💘", "💗", "❤️", "💕", "💞"];
+    const total = 30; // quantidade de corações
+
+    for (let i = 0; i < total; i++) {
+      const heart = document.createElement("div");
+      heart.classList.add("heart");
+      heart.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+      heart.style.left = Math.random() * 100 + "vw";
+      heart.style.fontSize = 18 + Math.random() * 20 + "px";
+      heart.style.animationDuration = 5 + Math.random() * 5 + "s";
+      heart.style.animationDelay = Math.random() * 5 + "s";
+      document.body.appendChild(heart);
+    }
+  </script>
 </body>
 </html>
