@@ -3,13 +3,14 @@
 <head>
   <meta charset="UTF-8">
   <title>Estrelado com Cometas</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <style>
+    /* Corpo e fundo */
     html, body {
       margin: 0;
       padding: 0;
       height: 100%;
-      overflow: hidden;
+      overflow-x: hidden; /* somente scroll horizontal bloqueado */
       background: radial-gradient(ellipse at bottom, #0b0c2a 0%, #000 100%);
       font-family: Arial, sans-serif;
       color: #fff;
@@ -23,12 +24,12 @@
       height: 2px;
       background: #fff;
       border-radius: 50%;
-      animation: brilhar 2s infinite ease-in-out;
-      opacity: 0.8;
+      animation: brilhar 2s ease-in-out infinite;
+      opacity: .8;
     }
     @keyframes brilhar {
-      0%, 100% { opacity: 0.2; }
-      50%      { opacity: 1;   }
+      0%,100% { opacity: .2; }
+      50%     { opacity: 1;   }
     }
 
     /* Cometas */
@@ -36,8 +37,8 @@
       position: absolute;
       width: 150px;
       height: 2px;
-      background: linear-gradient(90deg, rgba(255,255,255,0), #fff);
-      opacity: 0.6;
+      background: linear-gradient(90deg, transparent, #fff);
+      opacity: .6;
       transform: rotate(60deg);
       animation: queda 10s ease-in-out infinite;
     }
@@ -54,7 +55,7 @@
       height: 60px;
       background: #fff;
       border-radius: 100px;
-      opacity: 0.05;
+      opacity: .05;
       box-shadow: 30px 0 0 #fff, 60px 10px 0 #fff, 90px 0 0 #fff;
       animation: moverNuvem linear infinite;
     }
@@ -68,7 +69,7 @@
       position: absolute;
       font-size: 24px;
       animation: float 8s linear infinite;
-      opacity: 0.8;
+      opacity: .8;
       z-index: 3;
     }
     @keyframes float {
@@ -77,18 +78,18 @@
       100% { transform: translateY(-10vh) scale(1.5); opacity: 0; }
     }
 
-    /* Contador e foto */
+    /* Contador central */
     #contador-container {
       position: absolute;
       top: 50%;
       left: 50%;
-      transform: translate(-50%,-50%);
+      transform: translate(-50%, -50%);
       z-index: 4;
     }
     #foto-com-borda {
       padding: 8px;
       border-radius: 12px;
-      background: linear-gradient(45deg,#000,#0000,#05154b);
+      background: linear-gradient(45deg, #000, #0000, #05154b);
       background-size: 600% 600%;
       animation: gradiente 5s ease infinite;
       display: inline-block;
@@ -109,28 +110,30 @@
     #contador {
       font-size: 1.8rem;
       font-weight: bold;
-      background: linear-gradient(90deg,#fff,#484ac0,#fff);
+      background: linear-gradient(90deg, #fff, #484ac0, #fff);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       animation: gradiente 5s ease infinite;
       background-size: 600% 600%;
     }
 
-    /* Visualizador de áudio */
+    /* Visualizador de áudio fixo */
     #container-visualizador {
-      position: fixed !important;
-      bottom: 60px !important;
-      left: 50% !important;
-      transform: translateX(-50%) !important;
-      z-index: 9999 !important;
-      pointer-events: none !important;
+      position: fixed;
+      bottom: 60px;
+      left: 0;
+      right: 0;
+      width: 550px;
+      height: 240px;
+      margin: 0 auto;
+      z-index: 9999;
+      pointer-events: none;
     }
     #visualizador {
-      display: block !important;
-      width: 100% !important;
-      max-width: 550px !important;
-      height: 240px !important;
-      pointer-events: none !important;
+      width: 100%;
+      height: 100%;
+      display: block;
+      pointer-events: none;
     }
 
     h1 {
@@ -152,12 +155,12 @@
 </head>
 <body>
 
-  <!-- 🎵 Música -->
+  <!-- Áudio -->
   <audio id="player" autoplay loop crossorigin="anonymous">
     <source src="https://unwickbr.github.io/qr-code-site/Until%20I%20Found%20You.mp3" type="audio/mpeg">
   </audio>
 
-  <!-- 💖 Contador com imagem -->
+  <!-- Contador com foto -->
   <div id="contador-container">
     <div id="foto-com-borda">
       <img src="https://unwickbr.github.io/qr-code-site/Image.jpg" alt="Foto especial">
@@ -166,15 +169,14 @@
     </div>
   </div>
 
-  <!-- Container do visualizador -->
+  <!-- Visualizador de áudio -->
   <div id="container-visualizador">
     <canvas id="visualizador" width="550" height="240"></canvas>
   </div>
 
-  <!-- Scripts -->
   <script>
-    document.addEventListener('DOMContentLoaded', function() {
-      // Estrelas
+    document.addEventListener('DOMContentLoaded', () => {
+      // Fundo: estrelas, cometas, nuvens, corações
       for (let i = 0; i < 150; i++) {
         const s = document.createElement('div');
         s.className = 'estrela';
@@ -183,7 +185,6 @@
         s.style.animationDuration = 1 + Math.random() * 2 + 's';
         document.body.appendChild(s);
       }
-      // Cometas
       for (let i = 0; i < 5; i++) {
         const c = document.createElement('div');
         c.className = 'cometa';
@@ -192,7 +193,6 @@
         c.style.animationDelay = Math.random() * 20 + 's';
         document.body.appendChild(c);
       }
-      // Nuvens
       for (let i = 0; i < 7; i++) {
         const n = document.createElement('div');
         n.className = 'nuvem';
@@ -201,7 +201,6 @@
         n.style.animationDuration = 60 + Math.random() * 40 + 's';
         document.body.appendChild(n);
       }
-      // Corações e palavras
       const emojis = ['💖','💘','💗','❤️','💕','💞'];
       const textos = ['Linda','Maravilhosa','Deusa','Perfeita','Gatona','Meu amor','0 defeitos','Te amo 💖'];
       for (let i = 0; i < 25; i++) {
@@ -235,10 +234,10 @@
         requestAnimationFrame(draw);
         analyser.getByteFrequencyData(dataArray);
         ctx.clearRect(0, 0, canvas.width, canvas.height);
-        const barW = 5.5, gap = 4, n = 20, cx = canvas.width/2;
+        const barW = 5.5, gap = 4, n = 20, cx = canvas.width / 2;
         for (let i = 0; i < n/2; i++) {
-          const h = (dataArray[i]/255) * canvas.height * 0.1;
-          const y = (canvas.height - h)/2 - 95;
+          const h = (dataArray[i] / 255) * canvas.height * 0.1;
+          const y = (canvas.height - h) / 2 - 95;
           ctx.fillStyle = '#fff';
           ctx.fillRect(cx + i*(barW+gap), y, barW, h);
           ctx.fillRect(cx - (i+1)*(barW+gap), y, barW, h);
@@ -250,7 +249,7 @@
       });
       draw();
 
-      // Contador
+      // Contador desde 30/04/2025
       function atualizarContador() {
         const inicio = new Date('2025-04-30T00:00:00');
         const diff = Date.now() - inicio;
@@ -258,10 +257,10 @@
           document.getElementById('contador').textContent = 'A data ainda não chegou.';
           return;
         }
-        let s = Math.floor(diff/1000);
-        const d = Math.floor(s/86400); s %= 86400;
-        const h = Math.floor(s/3600);  s %= 3600;
-        const m = Math.floor(s/60);
+        let s = Math.floor(diff / 1000);
+        const d = Math.floor(s / 86400); s %= 86400;
+        const h = Math.floor(s / 3600);  s %= 3600;
+        const m = Math.floor(s / 60);
         const sec = s % 60;
         document.getElementById('contador').textContent = `${d}d ${h}h ${m}m ${sec}s`;
       }
