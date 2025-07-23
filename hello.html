@@ -1,443 +1,82 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-
 <head>
   <meta charset="UTF-8">
-  <title>Estrelado com Cometas</title>
+  <title>💖 Start 💖</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
-    html,
-    body {
-      margin: 0;
-      padding: 0;
+    @import url('https://fonts.googleapis.com/css?family=Source+Code+Pro:200,900');
+
+    :root {
+      --text-color: #fff;
+      --shadow-color: rgba(255, 0, 0, 0.4);
+      --btn-color: hsl(0, 80%, 42%);
+      --bg-color: #141218;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html, body {
+      width: 100%;
       height: 100%;
+      margin: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: var(--bg-color);
+    }
+
+    button {
+      position: relative;
+      padding: 15px 40px;
+      border: none;
+      background-color: var(--btn-color);
+      color: var(--text-color);
+      font-family: "Source Code Pro", monospace;
+      font-size: 28px;
+      font-weight: 900;
+      border-radius: 10px;
+      cursor: pointer;
       overflow: hidden;
-      background: radial-gradient(ellipse at bottom, #0b0c2a 0%, #000 100%);
-      font-family: Arial, sans-serif;
-      color: #fff;
-      text-align: center;
-
+      box-shadow: var(--shadow-color) 2px 2px 22px;
     }
 
-
-    /* Estrelas piscando */
-    .estrela {
-      position: absolute;
-      width: 2px;
-      height: 2px;
-      background: rgb(255, 255, 255);
-      border-radius: 50%;
-      animation: brilhar 2s infinite ease-in-out;
-      opacity: 0.8;
-    }
-
-    @keyframes brilhar {
-
-      0%,
-      100% {
-        opacity: 0.2;
-      }
-
-      50% {
-        opacity: 1;
-      }
-    }
-
-
-
-    /* Cometas */
-    .cometa {
-      position: absolute;
-      width: 150px;
-      height: 2px;
-      background: linear-gradient(90deg, rgba(255, 255, 255, 0), rgb(255, 255, 255));
-      opacity: 0.6;
-      transform: rotate(60deg);
-      animation: queda 10s ease-in-out infinite;
-    }
-
-    @keyframes queda {
-      0% {
-        transform: translate(-150px, -150px) rotate(55deg);
-        opacity: 0;
-      }
-
-      20% {
-        opacity: 1;
-      }
-
-      100% {
-        transform: translate(100vw, 100vh) rotate(55deg);
-        opacity: 0;
-      }
-    }
-
-
-    /* Corações e palavras */
     .heart {
       position: absolute;
-      font-size: 24px;
-      animation: float 8s linear infinite;
+      font-size: 18px;
       opacity: 0.8;
-      z-index: 3;
-    }
-
-    @keyframes float {
-      0% {
-        transform: translateY(100vh) scale(1);
-        opacity: 0;
-      }
-
-      50% {
-        opacity: 1;
-      }
-
-      100% {
-        transform: translateY(-10vh) scale(1.5);
-        opacity: 0;
-      }
-    }
-
-    #contador-container {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      z-index: 4;
-    }
-
-    #foto-com-borda {
-      padding: 8px;
-      border-radius: 12px;
-      display: inline-block;
-      margin-bottom: 20px;
-      animation: gradiente 5s ease infinite;
-      background: linear-gradient(45deg, #000000, #00000000, #05154b);
-      padding-bottom: 80px;
-      background-size: 600% 600%;
-    }
-
-    @keyframes gradiente {
-      0% {
-        background-position: 0% 50%;
-      }
-
-      50% {
-        background-position: 100% 50%;
-      }
-
-      100% {
-        background-position: 0% 50%;
-      }
-    }
-    
-    #container-visualizador {
-    position: fixed;
-    bottom: 60px;
-    left: 0;
-    right: 0;
-    margin: 0 auto;
-    width: fit-content;
-    z-index: 9999;
-    pointer-events: none;
-    }
-
-    #foto-com-borda img {
-      width: 300px;
-      height: 300px;
-      object-fit: cover;
-      border-radius: 8px;
-    }
-
-    #visualizador {
-      position: fixed;
-      bottom: 60px;
-      left: 50%;
-      transform: translateX(-50%);
-      z-index: 10;
-      display: block;
-      max-width: 100%;
-      height: 240px;
+      animation: floatUp 4s linear infinite;
       pointer-events: none;
     }
 
-
-    #contador {
-      background: linear-gradient(90deg, #ffffff, #484ac0, #ffffff);
-      -webkit-background-clip: text;
-      font-size: 1.8rem;
-      -webkit-text-fill-color: transparent;
-      font-weight: bold;
-      animation: gradiente 5s ease infinite;
-      -webkit-text-fill-color: linear-gradient(45deg, #ffffff, #00000000, #05154b);
-      background-size: 600% 600%;
-    }
-
-    @keyframes gradientFlow {
-      50% {
-        background-position: 50%
-      }
-
-      100% {
-        background-position: 100%
-      }
-    }
-
-    h1 {
-      font-size: 1.0rem;
-      margin-bottom: 10px;
-      text-shadow: 1px 1px 4px #000;
-    }
-
-    .nuvem {
-      position: absolute;
-      width: 200px;
-      height: 60px;
-      background: #fff;
-      border-radius: 100px;
-      opacity: 0.05;
-      z-index: 0;
-      animation: moverNuvem linear infinite;
-      box-shadow:
-        30px 0px 0px 0px #ffffff,
-        60px 10px 0px 0px #ffffff,
-        90px 0px 0px 0px #ffffff;
-    }
-
-    @keyframes moverNuvem {
+    @keyframes floatUp {
       0% {
-        left: -300px;
+        transform: translateY(100%) scale(1);
+        opacity: 0;
       }
-
-      100% {
-        left: 100vw;
-      }
-    }
-
-    h1::before {
-      content: "💗";
-      display: inline-block;
-      animation: pulse 1s infinite;
-      margin-right: 8px;
-    }
-
-    @keyframes pulse {
-      0% {
-        transform: scale(1);
-      }
-
       50% {
-        transform: scale(1.3);
+        opacity: 1;
       }
-
       100% {
-        transform: scale(1);
+        transform: translateY(-100%) scale(1.2);
+        opacity: 0;
       }
     }
   </style>
 </head>
-    <div id="container-visualizador">
-  <canvas id="visualizador" width="550" height="240"></canvas>
-</div>
 <body>
-
-
-  <!-- 🎵 Música -->
-  <audio id="player" autoplay loop crossorigin="anonymous">
-    <source src="https://unwickbr.github.io/qr-code-site/Until%20I%20Found%20You.mp3" type="audio/mpeg">
-  </audio>
-
-  <!-- 💖 Contador com imagem -->
-  <div id="contador-container">
-    <div id="foto-com-borda">
-      <img src="https://unwickbr.github.io/qr-code-site/Image.jpg" alt="Foto especial">
-      <h1>Quanto tempo nos conhecemos:</h1>
-      <div id="contador">Calculando...</div>
-    </div>
-  </div>
-
-  <!-- 💫 Estrelas, cometas, nuvens, corações e visualizador -->
-  <script>
-    // Estrelas
-    for (let i = 0; i < 150; i++) {
-      const estrela = document.createElement("div");
-      estrela.classList.add("estrela");
-      estrela.style.top = `${Math.random() * 100}vh`;
-      estrela.style.left = `${Math.random() * 100}vw`;
-      estrela.style.animationDuration = `${1 + Math.random() * 2}s`;
-      document.body.appendChild(estrela);
-    }
-
-    // Cometas
-    for (let i = 0; i < 5; i++) {
-      const cometa = document.createElement("div");
-      cometa.classList.add("cometa");
-      cometa.style.top = `${Math.random() * 2}vh`;
-      cometa.style.left = `${-200 - Math.random() * 100}px`;
-      cometa.style.animationDelay = `${Math.random() * 20}s`;
-      document.body.appendChild(cometa);
-    }
-
-    // Nuvens
-    for (let i = 0; i < 7; i++) {
-      const nuvem = document.createElement("div");
-      nuvem.classList.add("nuvem");
-      const top = Math.floor(Math.random() * 80) + 2;
-      nuvem.style.top = `${top}vh`;
-      nuvem.style.animationDuration = `${60 + Math.random() * 40}s`;
-      const scale = 0.5 + Math.random() * 1.5;
-      nuvem.style.transform = `scale(${scale})`;
-      document.body.appendChild(nuvem);
-    }
-
-    // Corações e palavras
-    const emojis = ["💖", "💘", "💗", "❤️", "💕", "💞"];
-    const textos = ["Linda", "Maravilhosa", "Deusa", "Perfeita", "Gatona", "Meu amor", "0 defeitos", "Te amo 💖"];
-    const total = 25;
-
-    function corAleatoria() {
-      const r = Math.floor(Math.random() * 256);
-      const g = Math.floor(Math.random() * 256);
-      const b = Math.floor(Math.random() * 256);
-      return `rgb(${r}, ${g}, ${b})`;
-    }
-
-    for (let i = 0; i < total; i++) {
-      const item = document.createElement("div");
-      item.classList.add("heart");
-      item.textContent = Math.random() < 0.5
-        ? emojis[Math.floor(Math.random() * emojis.length)]
-        : textos[Math.floor(Math.random() * textos.length)];
-      item.style.left = Math.random() * 100 + "vw";
-      item.style.fontSize = 10 + Math.random() * 20 + "px";
-      item.style.animationDuration = 5 + Math.random() * 5 + "s";
-      item.style.animationDelay = Math.random() * 5 + "s";
-      item.style.color = corAleatoria();
-      document.body.appendChild(item);
-    }
-
-
-    const audio = document.getElementById("player");
-    audio.volume = 0.5; // Volume de 0.0 (mudo) até 1.0 (máximo)
-
-    const canvas = document.getElementById("visualizador");
-    const ctx = canvas.getContext("2d");
-
-    const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-    const source = audioCtx.createMediaElementSource(audio);
-    const analyser = audioCtx.createAnalyser();
-    analyser.fftSize = 32;
-
-    source.connect(analyser);
-    analyser.connect(audioCtx.destination);
-
-    const bufferLength = analyser.frequencyBinCount;
-    const dataArray = new Uint8Array(bufferLength);
-
-    const barCount = 6;
-    const barWidth = 20;
-    const spacing = 10;
-    const cornerRadius = 3;
-
-    function drawRoundedBar(x, y, width, height, radius, color) {
-      ctx.beginPath();
-      ctx.fillStyle = "rgba(255, 255, 255, 1)";
-      ctx.moveTo(x + radius, y);
-      ctx.lineTo(x + width - radius, y);
-      ctx.quadraticCurveTo(x + width, y, x + width, y + radius);
-      ctx.lineTo(x + width, y + height - radius);
-      ctx.quadraticCurveTo(x + width, y + height, x + width - radius, y + height);
-      ctx.lineTo(x + radius, y + height);
-      ctx.quadraticCurveTo(x, y + height, x, y + height - radius);
-      ctx.lineTo(x, y + radius);
-      ctx.quadraticCurveTo(x, y, x + radius, y);
-      ctx.fill();
-    }
-
-    function draw() {
-      requestAnimationFrame(draw);
-      analyser.getByteFrequencyData(dataArray);
-
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-      const barWidth = 5.5;
-      const barGap = 4;
-      const numBars = 20;
-      const centerX = canvas.width / 2;
-
-      for (let i = 0; i < numBars / 2; i++) {
-        const escalaAltura = 0.1;
-        const height = (dataArray[i] / 255) * canvas.height * escalaAltura;
-
-        const deslocamentoVertical = 95;
-        const y = (canvas.height - height) / 2 - deslocamentoVertical;
-
-
-        // barras à direita do centro
-        const xRight = centerX + i * (barWidth + barGap);
-        drawRoundedBar(xRight, y, barWidth, height, cornerRadius);
-
-        // barras à esquerda do centro
-        const xLeft = centerX - (i + 1) * (barWidth + barGap);
-        drawRoundedBar(xLeft, y, barWidth, height, cornerRadius);
-      }
-
-    }
-
-    // Libera o contexto de áudio no clique
-    window.addEventListener("click", () => {
-      if (audioCtx.state === "suspended") {
-        audioCtx.resume();
-      }
-      audio.play();
-    });
-
-    draw();
-
-    // Ativa contexto de áudio no clique
-    window.addEventListener("click", () => {
-      if (audioCtx.state === "suspended") {
-        audioCtx.resume();
-      }
-      audio.play();
-    });
-
-    // ⚠️ Garante que o contexto de áudio ativa após clique
-    window.addEventListener("click", () => {
-      if (audioCtx.state === "suspended") {
-        audioCtx.resume();
-      }
-      audio.play();
-    });
-
-    draw();
-
-    // 🕰️ Contador desde 30/04/2025
-    function atualizarContador() {
-      const inicio = new Date('2025-04-30T00:00:00');
-      const agora = new Date();
-      const diferenca = agora - inicio;
-
-      if (diferenca < 0) {
-        document.getElementById("contador").textContent = "A data ainda não chegou.";
-        return;
-      }
-
-      const segundosTotais = Math.floor(diferenca / 1000);
-      const dias = Math.floor(segundosTotais / 86400);
-      const horas = Math.floor((segundosTotais % 86400) / 3600);
-      const minutos = Math.floor((segundosTotais % 3600) / 60);
-      const segundos = segundosTotais % 60;
-
-      document.getElementById("contador").textContent =
-        `${dias}d ${horas}h ${minutos}m ${segundos}s`;
-    }
-
-    window.addEventListener("DOMContentLoaded", () => {
-      atualizarContador();
-      setInterval(atualizarContador, 1000);
-    });
-  </script>
+  <!--- <a href="https://unwickbr.github.io/qr-code-site/hello.html"> --->
+  <a href="Hello.html"> 
+    <button>
+      Começar
+      <span class="heart" style="left: 10%; animation-delay: 0s;">💖</span>
+      <span class="heart" style="left: 30%; animation-delay: 1s;">💘</span>
+      <span class="heart" style="left: 50%; animation-delay: 2s;">💗</span>
+      <span class="heart" style="left: 70%; animation-delay: 3s;">❤️</span>
+      <span class="heart" style="left: 85%; animation-delay: 4s;">💕</span>
+    </button>
+  </a>
 </body>
-
 </html>
