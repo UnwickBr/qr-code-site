@@ -2,81 +2,272 @@
 <html lang="pt-br">
 <head>
   <meta charset="UTF-8">
-  <title>💖 Start 💖</title>
+  <title>Estrelado com Cometas</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
-    @import url('https://fonts.googleapis.com/css?family=Source+Code+Pro:200,900');
-
-    :root {
-      --text-color: #fff;
-      --shadow-color: rgba(255, 0, 0, 0.4);
-      --btn-color: hsl(0, 80%, 42%);
-      --bg-color: #141218;
-    }
-
-    * {
-      box-sizing: border-box;
-    }
-
     html, body {
-      width: 100%;
-      height: 100%;
       margin: 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background-color: var(--bg-color);
-    }
-
-    button {
-      position: relative;
-      padding: 15px 40px;
-      border: none;
-      background-color: var(--btn-color);
-      color: var(--text-color);
-      font-family: "Source Code Pro", monospace;
-      font-size: 28px;
-      font-weight: 900;
-      border-radius: 10px;
-      cursor: pointer;
+      padding: 0;
+      height: 100%;
       overflow: hidden;
-      box-shadow: var(--shadow-color) 2px 2px 22px;
+      background: radial-gradient(ellipse at bottom, #0b0c2a 0%, #000 100%);
+      font-family: Arial, sans-serif;
+      color: #fff;
+      text-align: center;
     }
-
+    /* Estrelas piscando */
+    .estrela {
+      position: absolute;
+      width: 2px;
+      height: 2px;
+      background: #fff;
+      border-radius: 50%;
+      animation: brilhar 2s infinite ease-in-out;
+      opacity: 0.8;
+    }
+    @keyframes brilhar {
+      0%, 100% { opacity: 0.2; }
+      50%     { opacity: 1;   }
+    }
+    /* Cometas */
+    .cometa {
+      position: absolute;
+      width: 150px;
+      height: 2px;
+      background: linear-gradient(90deg, rgba(255,255,255,0), #fff);
+      opacity: 0.6;
+      transform: rotate(60deg);
+      animation: queda 10s ease-in-out infinite;
+    }
+    @keyframes queda {
+      0%   { transform: translate(-150px, -150px) rotate(55deg); opacity: 0; }
+      20%  { opacity: 1; }
+      100% { transform: translate(100vw, 100vh) rotate(55deg); opacity: 0; }
+    }
+    /* Corações e palavras */
     .heart {
       position: absolute;
-      font-size: 18px;
+      font-size: 24px;
+      animation: float 8s linear infinite;
       opacity: 0.8;
-      animation: floatUp 4s linear infinite;
+      z-index: 3;
+    }
+    @keyframes float {
+      0%   { transform: translateY(100vh) scale(1);  opacity: 0; }
+      50%  { opacity: 1; }
+      100% { transform: translateY(-10vh) scale(1.5); opacity: 0; }
+    }
+    /* Contador e foto */
+    #contador-container {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 4;
+    }
+    #foto-com-borda {
+      padding: 8px;
+      border-radius: 12px;
+      background: linear-gradient(45deg, #000, #0000, #05154b);
+      background-size: 600% 600%;
+      animation: gradiente 5s ease infinite;
+      display: inline-block;
+      margin-bottom: 20px;
+      padding-bottom: 80px;
+    }
+    @keyframes gradiente {
+      0%   { background-position: 0% 50%; }
+      50%  { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+    #foto-com-borda img {
+      width: 300px;
+      height: 300px;
+      object-fit: cover;
+      border-radius: 8px;
+    }
+    #contador {
+      font-size: 1.8rem;
+      font-weight: bold;
+      background: linear-gradient(90deg, #fff, #484ac0, #fff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: gradiente 5s ease infinite;
+      background-size: 600% 600%;
+    }
+    /* Nuvens */
+    .nuvem {
+      position: absolute;
+      width: 200px;
+      height: 60px;
+      background: #fff;
+      border-radius: 100px;
+      opacity: 0.05;
+      z-index: 0;
+      box-shadow: 30px 0 0 #fff, 60px 10px 0 #fff, 90px 0 0 #fff;
+      animation: moverNuvem linear infinite;
+    }
+    @keyframes moverNuvem {
+      0%   { left: -300px; }
+      100% { left: 100vw; }
+    }
+    /* Visualizador de áudio */
+    #container-visualizador {
+      position: fixed;
+      bottom: 60px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 10;
       pointer-events: none;
     }
-
-    @keyframes floatUp {
-      0% {
-        transform: translateY(100%) scale(1);
-        opacity: 0;
-      }
-      50% {
-        opacity: 1;
-      }
-      100% {
-        transform: translateY(-100%) scale(1.2);
-        opacity: 0;
-      }
+    #visualizador {
+      display: block;
+      max-width: 100%;
+      height: 240px;
+    }
+    h1 {
+      font-size: 1rem;
+      margin-bottom: 10px;
+      text-shadow: 1px 1px 4px #000;
+    }
+    h1::before {
+      content: "💗";
+      display: inline-block;
+      animation: pulse 1s infinite;
+      margin-right: 8px;
+    }
+    @keyframes pulse {
+      0%   { transform: scale(1); }
+      50%  { transform: scale(1.3); }
+      100% { transform: scale(1); }
     }
   </style>
 </head>
 <body>
-  <!--- <a href="https://unwickbr.github.io/qr-code-site/hello.html"> --->
-  <a href="Hello.html"> 
-    <button>
-      Começar
-      <span class="heart" style="left: 10%; animation-delay: 0s;">💖</span>
-      <span class="heart" style="left: 30%; animation-delay: 1s;">💘</span>
-      <span class="heart" style="left: 50%; animation-delay: 2s;">💗</span>
-      <span class="heart" style="left: 70%; animation-delay: 3s;">❤️</span>
-      <span class="heart" style="left: 85%; animation-delay: 4s;">💕</span>
-    </button>
-  </a>
+
+  <!-- 🎵 Música -->
+  <audio id="player" autoplay loop crossorigin="anonymous">
+    <source src="https://unwickbr.github.io/qr-code-site/Until%20I%20Found%20You.mp3" type="audio/mpeg">
+  </audio>
+
+  <!-- 💖 Contador com imagem -->
+  <div id="contador-container">
+    <div id="foto-com-borda">
+      <img src="https://unwickbr.github.io/qr-code-site/Image.jpg" alt="Foto especial">
+      <h1>Quanto tempo nos conhecemos:</h1>
+      <div id="contador">Calculando...</div>
+    </div>
+  </div>
+
+  <!-- 💫 Estrelas, cometas, nuvens e corações -->
+  <script>
+    // Estrelas
+    for (let i = 0; i < 150; i++) {
+      const estrela = document.createElement("div");
+      estrela.className = "estrela";
+      estrela.style.top = Math.random() * 100 + "vh";
+      estrela.style.left = Math.random() * 100 + "vw";
+      estrela.style.animationDuration = 1 + Math.random() * 2 + "s";
+      document.body.appendChild(estrela);
+    }
+    // Cometas
+    for (let i = 0; i < 5; i++) {
+      const cometa = document.createElement("div");
+      cometa.className = "cometa";
+      cometa.style.top = Math.random() * 2 + "vh";
+      cometa.style.left = -200 - Math.random() * 100 + "px";
+      cometa.style.animationDelay = Math.random() * 20 + "s";
+      document.body.appendChild(cometa);
+    }
+    // Nuvens
+    for (let i = 0; i < 7; i++) {
+      const nuvem = document.createElement("div");
+      nuvem.className = "nuvem";
+      nuvem.style.top = (2 + Math.random() * 80) + "vh";
+      nuvem.style.animationDuration = 60 + Math.random() * 40 + "s";
+      nuvem.style.transform = "scale(" + (0.5 + Math.random() * 1.5) + ")";
+      document.body.appendChild(nuvem);
+    }
+    // Corações e palavras
+    const emojis = ["💖","💘","💗","❤️","💕","💞"];
+    const textos = ["Linda","Maravilhosa","Deusa","Perfeita","Gatona","Meu amor","0 defeitos","Te amo 💖"];
+    for (let i = 0; i < 25; i++) {
+      const el = document.createElement("div");
+      el.className = "heart";
+      el.textContent = Math.random() < 0.5
+        ? emojis[Math.floor(Math.random()*emojis.length)]
+        : textos[Math.floor(Math.random()*textos.length)];
+      el.style.left = Math.random()*100 + "vw";
+      el.style.fontSize = 10 + Math.random()*20 + "px";
+      el.style.animationDuration = 5 + Math.random()*5 + "s";
+      el.style.animationDelay = Math.random()*5 + "s";
+      el.style.color = `rgb(${Math.floor(Math.random()*256)},${Math.floor(Math.random()*256)},${Math.floor(Math.random()*256)})`;
+      document.body.appendChild(el);
+    }
+  </script>
+
+  <!-- 📊 Visualizador de áudio -->
+  <div id="container-visualizador">
+    <canvas id="visualizador" width="550" height="240"></canvas>
+  </div>
+  <script>
+    const audio = document.getElementById("player");
+    audio.volume = 0.5;
+    const canvas = document.getElementById("visualizador");
+    const ctx = canvas.getContext("2d");
+    const audioCtx = new (window.AudioContext||window.webkitAudioContext)();
+    const source = audioCtx.createMediaElementSource(audio);
+    const analyser = audioCtx.createAnalyser();
+    analyser.fftSize = 32;
+    source.connect(analyser);
+    analyser.connect(audioCtx.destination);
+    const dataArray = new Uint8Array(analyser.frequencyBinCount);
+    function draw() {
+      requestAnimationFrame(draw);
+      analyser.getByteFrequencyData(dataArray);
+      ctx.clearRect(0,0,canvas.width,canvas.height);
+      const barWidth = 5.5, barGap = 4, numBars = 20;
+      const centerX = canvas.width/2;
+      for (let i=0; i<numBars/2; i++){
+        const h = (dataArray[i]/255)*canvas.height*0.1;
+        const y = (canvas.height-h)/2 - 95;
+        // direita
+        ctx.beginPath();
+        ctx.fillStyle="#fff";
+        ctx.moveTo(centerX + i*(barWidth+barGap)+3,y);
+        ctx.fillRect(centerX + i*(barWidth+barGap), y, barWidth, h);
+        // esquerda
+        ctx.fillRect(centerX - (i+1)*(barWidth+barGap), y, barWidth, h);
+      }
+    }
+    window.addEventListener("click", ()=>{
+      if (audioCtx.state==="suspended") audioCtx.resume();
+      audio.play();
+    });
+    draw();
+
+    // Contador desde 30/04/2025
+    function atualizarContador(){
+      const inicio = new Date("2025-04-30T00:00:00");
+      const diff = Date.now() - inicio;
+      if(diff<0){
+        document.getElementById("contador").textContent = "A data ainda não chegou.";
+        return;
+      }
+      let s = Math.floor(diff/1000);
+      const d = Math.floor(s/86400);
+      s %= 86400;
+      const h = Math.floor(s/3600);
+      s %= 3600;
+      const m = Math.floor(s/60);
+      const sec = s % 60;
+      document.getElementById("contador").textContent =
+        `${d}d ${h}h ${m}m ${sec}s`;
+    }
+    window.addEventListener("DOMContentLoaded", ()=>{
+      atualizarContador();
+      setInterval(atualizarContador,1000);
+    });
+  </script>
 </body>
 </html>
