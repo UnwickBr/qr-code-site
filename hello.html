@@ -51,12 +51,31 @@
     }
 
     #foto-com-borda {
-      background: #000;
       padding: 8px;
       border-radius: 12px;
       display: inline-block;
       margin-bottom: 20px;
-      box-shadow: 0 0 10px #000;
+      animation: gradiente 5s ease infinite;
+      background: linear-gradient(45deg, #000000, #00000000, #000000);
+      background-size: 600% 600%;
+    }
+
+    @keyframes gradiente {
+      0% {
+        background-position: 0% 50%;
+      }
+
+      50% {
+        background-position: 100% 50%;
+      }
+
+      100% {
+        background-position: 0% 50%;
+      }
+    }
+
+    #foto-com-borda.pulsar {
+      transform: scale(1.05);
     }
 
     #foto-com-borda img {
@@ -82,7 +101,7 @@
 
 <body>
   <!-- Música de fundo -->
-  <audio autoplay loop>
+  <audio id="player" autoplay loop crossorigin="anonymous">
     <source src="https://unwickbr.github.io/qr-code-site/Until%20I%20Found%20You.mp3" type="audio/mpeg">
   </audio>
 
@@ -92,49 +111,83 @@
       <img src="https://unwickbr.github.io/qr-code-site/Image.jpg" alt="Foto especial">
       <h1>Quanto tempo nos conhecemos:</h1>
       <div id="contador">Calculando...</div>
-</body>
-</div>
+    </div> <!-- fecha #foto-com-borda -->
+  </div> <!-- fecha #contador-container -->
 
-<!-- Geração de corações animados -->
-<script>
-  const emojis = ["💖", "💘", "💗", "❤️", "💕", "💞"];
-  const total = 30;
+  </div> <!-- fecha #foto-com-borda -->
+  </div> <!-- fecha #contador-container -->
 
-  for (let i = 0; i < total; i++) {
-    const heart = document.createElement("div");
-    heart.classList.add("heart");
-    heart.textContent = emojis[Math.floor(Math.random() * emojis.length)];
-    heart.style.left = Math.random() * 100 + "vw";
-    heart.style.fontSize = 18 + Math.random() * 20 + "px";
-    heart.style.animationDuration = 5 + Math.random() * 5 + "s";
-    heart.style.animationDelay = Math.random() * 5 + "s";
-    document.body.appendChild(heart);
-  }
+  <!-- Geração de corações animados + contador + pulsar com som -->
+  <script>
+    const emojis = ["💖", "💘", "💗", "❤️", "💕", "💞"];
+    const total = 30;
 
-  // Contador desde 30/04/2025
-  function atualizarContador() {
-    const inicio = new Date('2025-04-30T00:00:00');
-    const agora = new Date();
-    const diferenca = agora - inicio;
-
-    if (diferenca < 0) {
-      document.getElementById("contador").textContent = "A data ainda não chegou.";
-      return;
+    for (let i = 0; i < total; i++) {
+      const heart = document.createElement("div");
+      heart.classList.add("heart");
+      heart.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+      heart.style.left = Math.random() * 100 + "vw";
+      heart.style.fontSize = 18 + Math.random() * 20 + "px";
+      heart.style.animationDuration = 5 + Math.random() * 5 + "s";
+      heart.style.animationDelay = Math.random() * 5 + "s";
+      document.body.appendChild(heart);
     }
 
-    const segundosTotais = Math.floor(diferenca / 1000);
-    const dias = Math.floor(segundosTotais / 86400);
-    const horas = Math.floor((segundosTotais % 86400) / 3600);
-    const minutos = Math.floor((segundosTotais % 3600) / 60);
-    const segundos = segundosTotais % 60;
+    // Contador desde 30/04/2025
+    function atualizarContador() {
+      const inicio = new Date('2025-04-30T00:00:00');
+      const agora = new Date();
+      const diferenca = agora - inicio;
 
-    document.getElementById("contador").textContent =
-      `${dias}d ${horas}h ${minutos}m ${segundos}s`;
-  }
+      if (diferenca < 0) {
+        document.getElementById("contador").textContent = "A data ainda não chegou.";
+        return;
+      }
 
-  setInterval(atualizarContador, 1000);
-  atualizarContador();
-</script>
+      const segundosTotais = Math.floor(diferenca / 1000);
+      const dias = Math.floor(segundosTotais / 86400);
+      const horas = Math.floor((segundosTotais % 86400) / 3600);
+      const minutos = Math.floor((segundosTotais % 3600) / 60);
+      const segundos = segundosTotais % 60;
+
+      document.getElementById("contador").textContent =
+        `${dias}d ${horas}h ${minutos}m ${segundos}s`;
+    }
+
+    setInterval(atualizarContador, 1000);
+    atualizarContador();
+
+    // Pulsar com base no volume real da música
+    const audio = document.getElementById("player");
+    const ctx = new (window.AudioContext || window.webkitAudioContext)();
+    const src = ctx.createMediaElementSource(audio);
+    const analyser = ctx.createAnalyser();
+
+    src.connect(analyser);
+    analyser.connect(ctx.destination);
+    analyser.fftSize = 256;
+
+    const bufferLength = analyser.frequencyBinCount;
+    const dataArray = new Uint8Array(bufferLength);
+
+    const foto = document.getElementById("foto-com-borda");
+
+    function pulsarComSom() {
+      analyser.getByteFrequencyData(dataArray);
+      const volume = dataArray.reduce((a, b) => a + b) / bufferLength;
+
+      if (volume > 100) {
+        foto.classList.add("pulsar");
+      } else {
+        foto.classList.remove("pulsar");
+      }
+
+      requestAnimationFrame(pulsarComSom);
+    }
+
+    audio.onplay = () => ctx.resume();
+    pulsarComSom();
+  </script>
 </body>
 
 </html>
