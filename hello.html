@@ -296,6 +296,8 @@
 
 
     const audio = document.getElementById("player");
+    audio.volume = 0.5; // Volume de 0.0 (mudo) até 1.0 (máximo)
+
     const canvas = document.getElementById("visualizador");
     const ctx = canvas.getContext("2d");
 
@@ -317,7 +319,7 @@
 
     function drawRoundedBar(x, y, width, height, radius, color) {
       ctx.beginPath();
-      ctx.fillStyle = "rgba(255, 255, 255, 0.6)";
+      ctx.fillStyle = "rgba(255, 255, 255, 1)";
       ctx.moveTo(x + radius, y);
       ctx.lineTo(x + width - radius, y);
       ctx.quadraticCurveTo(x + width, y, x + width, y + radius);
@@ -336,13 +338,13 @@
 
       ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-      const barWidth = 7;
+      const barWidth = 5.5;
       const barGap = 4;
       const numBars = 20;
       const centerX = canvas.width / 2;
 
       for (let i = 0; i < numBars / 2; i++) {
-        const escalaAltura = 0.2;
+        const escalaAltura = 0.1;
         const height = (dataArray[i] / 255) * canvas.height * escalaAltura;
 
         const deslocamentoVertical = 95;
