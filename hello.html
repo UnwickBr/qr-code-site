@@ -3,7 +3,7 @@
 
 <head>
   <meta charset="UTF-8">
-  <title>Página Principal</title>
+  <title>Estrelado com Cometas</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
     html,
@@ -12,18 +12,73 @@
       padding: 0;
       height: 100%;
       overflow: hidden;
-      background: linear-gradient(to top, #141218, #8b004f);
+      background: radial-gradient(ellipse at bottom, #0b0c2a 0%, #000 100%);
       font-family: Arial, sans-serif;
       color: #fff;
       text-align: center;
+
     }
 
+
+    /* Estrelas piscando */
+    .estrela {
+      position: absolute;
+      width: 2px;
+      height: 2px;
+      background: white;
+      border-radius: 50%;
+      animation: brilhar 2s infinite ease-in-out;
+      opacity: 0.8;
+    }
+
+    @keyframes brilhar {
+
+      0%,
+      100% {
+        opacity: 0.2;
+      }
+
+      50% {
+        opacity: 1;
+      }
+    }
+
+
+    /* Cometas */
+    .cometa {
+      position: absolute;
+      width: 150px;
+      height: 2px;
+      background: linear-gradient(90deg, white, rgba(255, 255, 255, 0));
+      opacity: 0.6;
+      transform: rotate(45deg);
+      animation: queda 5s ease-in-out infinite;
+    }
+
+    @keyframes queda {
+      0% {
+        transform: translate(-150px, -150px) rotate(45deg);
+        opacity: 0;
+      }
+
+      20% {
+        opacity: 1;
+      }
+
+      100% {
+        transform: translate(100vw, 100vh) rotate(45deg);
+        opacity: 0;
+      }
+    }
+
+
+    /* Corações e palavras */
     .heart {
       position: absolute;
       font-size: 24px;
       animation: float 8s linear infinite;
       opacity: 0.8;
-      color: #fff;
+      z-index: 3;
     }
 
     @keyframes float {
@@ -47,7 +102,7 @@
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
-      z-index: 2;
+      z-index: 4;
     }
 
     #foto-com-borda {
@@ -56,7 +111,7 @@
       display: inline-block;
       margin-bottom: 20px;
       animation: gradiente 5s ease infinite;
-      background: linear-gradient(45deg, #000000, #00000000, #000000);
+      background: linear-gradient(45deg, #000000, #00000000, #05154b);
       background-size: 600% 600%;
     }
 
@@ -72,10 +127,6 @@
       100% {
         background-position: 0% 50%;
       }
-    }
-
-    #foto-com-borda.pulsar {
-      transform: scale(1.05);
     }
 
     #foto-com-borda img {
@@ -96,41 +147,119 @@
       margin-bottom: 10px;
       text-shadow: 1px 1px 4px #000;
     }
+
+    .nuvem {
+      position: absolute;
+      width: 200px;
+      height: 60px;
+      background: #fff;
+      border-radius: 100px;
+      opacity: 0.05;
+      z-index: 0;
+      animation: moverNuvem linear infinite;
+      box-shadow:
+        30px 0px 0px 0px #b1b1b1,
+        60px 10px 0px 0px #ffffff,
+        90px 0px 0px 0px #5a5a5a;
+    }
+
+    @keyframes moverNuvem {
+      0% {
+        left: -300px;
+      }
+
+      100% {
+        left: 100vw;
+      }
+    }
   </style>
 </head>
 
 <body>
-  <!-- Música de fundo -->
+
+  <script>
+    // Estrelas
+    for (let i = 0; i < 150; i++) {
+      const estrela = document.createElement("div");
+      estrela.classList.add("estrela");
+      estrela.style.top = `${Math.random() * 100}vh`;
+      estrela.style.left = `${Math.random() * 100}vw`;
+      estrela.style.animationDuration = `${1 + Math.random() * 2}s`;
+      document.body.appendChild(estrela);
+    }
+
+    // Cometas
+    for (let i = 0; i < 5; i++) {
+      const cometa = document.createElement("div");
+      cometa.classList.add("cometa");
+      cometa.style.top = `${Math.random() * 30}vh`;
+      cometa.style.left = `${-200 - Math.random() * 300}px`;
+      cometa.style.animationDelay = `${i * 3}s`;
+      document.body.appendChild(cometa);
+    }
+
+    // Nuvens
+    const totalNuvens = 7;
+
+    for (let i = 0; i < totalNuvens; i++) {
+      const nuvem = document.createElement("div");
+      nuvem.classList.add("nuvem");
+
+      // Altura aleatória entre 5vh e 70vh
+      const top = Math.floor(Math.random() * 65) + 5;
+      nuvem.style.top = `${top}vh`;
+
+      // Velocidade diferente por nuvem
+      nuvem.style.animationDuration = `${60 + Math.random() * 40}s`;
+
+      // Escala (tamanho) aleatória
+      const scale = 0.5 + Math.random() * 1.5;
+      nuvem.style.transform = `scale(${scale})`;
+
+      document.body.appendChild(nuvem);
+    }
+  </script>
+
+
+  <!-- Música -->
   <audio id="player" autoplay loop crossorigin="anonymous">
     <source src="https://unwickbr.github.io/qr-code-site/Until%20I%20Found%20You.mp3" type="audio/mpeg">
   </audio>
 
-  <!-- Contador com imagem acima -->
+  <!-- Contador -->
   <div id="contador-container">
     <div id="foto-com-borda">
       <img src="https://unwickbr.github.io/qr-code-site/Image.jpg" alt="Foto especial">
       <h1>Quanto tempo nos conhecemos:</h1>
       <div id="contador">Calculando...</div>
-    </div> <!-- fecha #foto-com-borda -->
-  </div> <!-- fecha #contador-container -->
+    </div>
+  </div>
 
-  </div> <!-- fecha #foto-com-borda -->
-  </div> <!-- fecha #contador-container -->
-
-  <!-- Geração de corações animados + contador + pulsar com som -->
+  <!-- Corações e textos flutuando -->
   <script>
     const emojis = ["💖", "💘", "💗", "❤️", "💕", "💞"];
-    const total = 30;
+    const textos = ["Linda", "Maravilhosa", "Deusa", "Perfeita", "Gatona", "Meu amor", "0 defeitos", "Te amo 💖"];
+    const total = 25;
+
+    function corAleatoria() {
+      const r = Math.floor(Math.random() * 256);
+      const g = Math.floor(Math.random() * 256);
+      const b = Math.floor(Math.random() * 256);
+      return `rgb(${r}, ${g}, ${b})`;
+    }
 
     for (let i = 0; i < total; i++) {
-      const heart = document.createElement("div");
-      heart.classList.add("heart");
-      heart.textContent = emojis[Math.floor(Math.random() * emojis.length)];
-      heart.style.left = Math.random() * 100 + "vw";
-      heart.style.fontSize = 18 + Math.random() * 20 + "px";
-      heart.style.animationDuration = 5 + Math.random() * 5 + "s";
-      heart.style.animationDelay = Math.random() * 5 + "s";
-      document.body.appendChild(heart);
+      const item = document.createElement("div");
+      item.classList.add("heart");
+      item.textContent = Math.random() < 0.5
+        ? emojis[Math.floor(Math.random() * emojis.length)]
+        : textos[Math.floor(Math.random() * textos.length)];
+      item.style.left = Math.random() * 100 + "vw";
+      item.style.fontSize = 18 + Math.random() * 20 + "px";
+      item.style.animationDuration = 5 + Math.random() * 5 + "s";
+      item.style.animationDelay = Math.random() * 5 + "s";
+      item.style.color = corAleatoria();
+      document.body.appendChild(item);
     }
 
     // Contador desde 30/04/2025
@@ -156,7 +285,6 @@
 
     setInterval(atualizarContador, 1000);
     atualizarContador();
-
   </script>
 </body>
 
