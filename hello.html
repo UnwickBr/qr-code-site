@@ -157,36 +157,6 @@
     setInterval(atualizarContador, 1000);
     atualizarContador();
 
-    // Pulsar com base no volume real da música
-    const audio = document.getElementById("player");
-    const ctx = new (window.AudioContext || window.webkitAudioContext)();
-    const src = ctx.createMediaElementSource(audio);
-    const analyser = ctx.createAnalyser();
-
-    src.connect(analyser);
-    analyser.connect(ctx.destination);
-    analyser.fftSize = 256;
-
-    const bufferLength = analyser.frequencyBinCount;
-    const dataArray = new Uint8Array(bufferLength);
-
-    const foto = document.getElementById("foto-com-borda");
-
-    function pulsarComSom() {
-      analyser.getByteFrequencyData(dataArray);
-      const volume = dataArray.reduce((a, b) => a + b) / bufferLength;
-
-      if (volume > 100) {
-        foto.classList.add("pulsar");
-      } else {
-        foto.classList.remove("pulsar");
-      }
-
-      requestAnimationFrame(pulsarComSom);
-    }
-
-    audio.onplay = () => ctx.resume();
-    pulsarComSom();
   </script>
 </body>
 
