@@ -251,19 +251,32 @@
       draw();
 
       // Contador
-      function atualizarContador(){
-        const inicio = new Date('2025-04-30T00:00:00');
-        const diff = Date.now() - inicio;
-        if(diff<0){
-          document.getElementById('contador').textContent = 'A data ainda não chegou.';
-          return;
-        }
-        let s = Math.floor(diff/1000),
-            d = Math.floor(s/86400); s%=86400,
-            h = Math.floor(s/3600);  s%=3600,
-            m = Math.floor(s/60),
-            sec = s%60;
-        document.getElementById('contador').textContent = `${M}m ${d}d ${h}hr ${m}min ${sec}s`;
+      function atualizarContador() {
+      const inicio = new Date('2025-04-30T00:00:00');
+      const agora = new Date();
+      const diferenca = agora - inicio;
+    
+      if (diferenca < 0) {
+        document.getElementById("contador").textContent = "A data ainda não chegou.";
+        return;
+      }
+    
+        let segundosTotais = Math.floor(diferenca / 1000);
+      
+        const meses = Math.floor(segundosTotais / (60 * 60 * 24 * 30));
+        segundosTotais %= (60 * 60 * 24 * 30);
+      
+        const dias = Math.floor(segundosTotais / (60 * 60 * 24));
+        segundosTotais %= (60 * 60 * 24);
+      
+        const horas = Math.floor(segundosTotais / 3600);
+        segundosTotais %= 3600;
+      
+        const minutos = Math.floor(segundosTotais / 60);
+        const segundos = segundosTotais % 60;
+      
+        document.getElementById("contador").textContent =
+          `${meses}M ${dias}d ${horas}hr ${minutos}min ${segundos}s`;
       }
       atualizarContador();
       setInterval(atualizarContador,1000);
