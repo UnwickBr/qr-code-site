@@ -27,6 +27,7 @@
       justify-content: center;
       background-color: var(--bg-color);
       font-family: "Source Code Pro", monospace;
+      overflow: hidden;
     }
 
     button {
@@ -41,6 +42,7 @@
       cursor: pointer;
       overflow: hidden;
       box-shadow: var(--shadow-color) 2px 2px 22px;
+      z-index: 2;
     }
 
     .heart {
@@ -57,28 +59,40 @@
       100% { transform: translateY(-100%) scale(1.2); opacity: 0; }
     }
 
-    /* Overlay para a contagem regressiva */
     #overlay {
       position: fixed;
       top: 0; left: 0;
-      width: 100vw;
-      height: 100vh;
-      background: #000000e0;
-      color: #ff006a;
-      font-size: 4rem;
+      width: 100vw; height: 100vh;
+      background: rgba(0, 0, 0, 0.9);
       display: none;
       align-items: center;
       justify-content: center;
-      z-index: 9999;
+      z-index: 10;
       flex-direction: column;
+    }
+
+    #countdown {
+      font-size: 80px;
+      color: rgb(255, 0, 140);
+      font-weight: bold;
+      animation: explode 1s ease-out;
+    }
+
+    @keyframes explode {
+      0%   { transform: scale(1); opacity: 1; }
+      80%  { transform: scale(2); opacity: 0; }
+      100% { transform: scale(0); opacity: 0; }
     }
   </style>
 </head>
 <body>
 
   <!-- Tela de contagem -->
-  <div id="overlay">5</div>
+  <div id="overlay">
+    <div id="countdown">5</div>
+  </div>
 
+  <!-- Botão iniciar -->
   <button id="startBtn">
     Começar
     <span class="heart" style="left: 10%; animation-delay: 0s;">💖</span>
@@ -91,22 +105,33 @@
   <script>
     const button = document.getElementById('startBtn');
     const overlay = document.getElementById('overlay');
+    const countdown = document.getElementById('countdown');
     const destino = "https://unwickbr.github.io/qr-code-site/hello.html";
 
     button.addEventListener('click', () => {
+      button.style.display = 'none';
       overlay.style.display = 'flex';
+
       let contagem = 5;
+      countdown.textContent = contagem;
 
       const intervalo = setInterval(() => {
         contagem--;
-        overlay.textContent = contagem;
+        countdown.style.animation = "none";
+        countdown.offsetHeight;
+        countdown.style.animation = "explode 1s ease-out";
+        countdown.textContent = contagem;
 
-        if (contagem === 0) {
+        if (contagem <= 0) {
           clearInterval(intervalo);
-          window.location.href = destino;
+          countdown.textContent = "💖";
+          setTimeout(() => {
+            window.location.href = destino;
+          }, 700);
         }
       }, 1000);
     });
   </script>
+
 </body>
 </html>
