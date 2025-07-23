@@ -89,8 +89,8 @@
     }
     #foto-com-borda {
       padding:8px; border-radius:12px;
-      background:linear-gradient(45deg,#ffffff,#0000,#ffffff);
-      background-size:600% 600%; animation:gradiente 5s ease infinite;
+      background:linear-gradient(45deg,#000,#ffffff00,#ffffff);
+      background-size:600% 600%; animation:gradiente 10s ease infinite;
       display:inline-block; margin-bottom:20px; padding-bottom:80px;
     }
     @keyframes gradiente {
@@ -101,9 +101,11 @@
     }
     #contador {
       font-size:1.2rem; font-weight:bold;
-      background:linear-gradient(90deg,#fff,#484ac0,#fff);
+      background:linear-gradient(90deg,#fff,#ffffff,#fff);
+      text-shadow: 5px, #000;
       -webkit-background-clip:text; -webkit-text-fill-color:transparent;
       animation:gradiente 5s ease infinite;
+      text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.6);
     }
 
     /* Visualizador de áudio fixo */
@@ -137,7 +139,7 @@
     @media only screen and (max-width: 600px) {
       /* para telas até 600px de largura (mobile) */
       #container-visualizador {
-        bottom: -15px; /* desce o visualizador um pouco mais */
+        bottom: 20x; /* desce o visualizador um pouco mais */
   }
 }
 
@@ -255,26 +257,26 @@
       const inicio = new Date('2025-04-30T00:00:00');
       const agora = new Date();
       const diferenca = agora - inicio;
-    
+
       if (diferenca < 0) {
         document.getElementById("contador").textContent = "A data ainda não chegou.";
         return;
       }
-    
+
         let segundosTotais = Math.floor(diferenca / 1000);
-      
+
         const meses = Math.floor(segundosTotais / (60 * 60 * 24 * 30));
         segundosTotais %= (60 * 60 * 24 * 30);
-      
+
         const dias = Math.floor(segundosTotais / (60 * 60 * 24));
         segundosTotais %= (60 * 60 * 24);
-      
+
         const horas = Math.floor(segundosTotais / 3600);
         segundosTotais %= 3600;
-      
+
         const minutos = Math.floor(segundosTotais / 60);
         const segundos = segundosTotais % 60;
-      
+
         document.getElementById("contador").textContent =
           `${meses}M ${dias}d ${horas}hr ${minutos}min ${segundos}s`;
       }
