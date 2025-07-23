@@ -263,7 +263,7 @@
             h = Math.floor(s/3600);  s%=3600,
             m = Math.floor(s/60),
             sec = s%60;
-        document.getElementById('contador').textContent = `${d}d ${h}h ${m}m ${sec}s`;
+        document.getElementById('contador').textContent = `${M}m ${d}d ${h}hr ${m}min ${sec}s`;
       }
       atualizarContador();
       setInterval(atualizarContador,1000);
