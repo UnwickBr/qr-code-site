@@ -3,7 +3,7 @@
 
 <head>
   <meta charset="UTF-8">
-  <title>Pagina Principal</title>
+  <title>Página Principal</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
     html,
@@ -13,6 +13,9 @@
       height: 100%;
       overflow: hidden;
       background: linear-gradient(to top, #141218, #8b004f);
+      font-family: Arial, sans-serif;
+      color: #fff;
+      text-align: center;
     }
 
     .heart {
@@ -38,31 +41,100 @@
         opacity: 0;
       }
     }
+
+    #contador-container {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 2;
+    }
+
+    #foto-com-borda {
+      background: #000;
+      padding: 8px;
+      border-radius: 12px;
+      display: inline-block;
+      margin-bottom: 20px;
+      box-shadow: 0 0 10px #000;
+    }
+
+    #foto-com-borda img {
+      width: 300px;
+      height: 300px;
+      object-fit: cover;
+      border-radius: 8px;
+    }
+
+    #contador {
+      font-size: 1.5rem;
+      font-weight: bold;
+      text-shadow: 2px 2px 5px #000;
+    }
+
+    h1 {
+      font-size: 1.2rem;
+      margin-bottom: 10px;
+      text-shadow: 1px 1px 4px #000;
+    }
   </style>
 </head>
 
 <body>
-  <!-- Música -->
+  <!-- Música de fundo -->
   <audio autoplay loop>
     <source src="https://unwickbr.github.io/qr-code-site/Until%20I%20Found%20You.mp3" type="audio/mpeg">
   </audio>
 
-  <!-- JavaScript para gerar corações -->
-  <script>
-    const emojis = ["💖", "💘", "💗", "❤️", "💕", "💞"];
-    const total = 30; // quantidade de corações
+  <!-- Contador com imagem acima -->
+  <div id="contador-container">
+    <div id="foto-com-borda">
+      <img src="https://unwickbr.github.io/qr-code-site/Image.jpg" alt="Foto especial">
+      <h1>Quanto tempo nos conhecemos:</h1>
+      <div id="contador">Calculando...</div>
+</body>
+</div>
 
-    for (let i = 0; i < total; i++) {
-      const heart = document.createElement("div");
-      heart.classList.add("heart");
-      heart.textContent = emojis[Math.floor(Math.random() * emojis.length)];
-      heart.style.left = Math.random() * 100 + "vw";
-      heart.style.fontSize = 18 + Math.random() * 20 + "px";
-      heart.style.animationDuration = 5 + Math.random() * 5 + "s";
-      heart.style.animationDelay = Math.random() * 5 + "s";
-      document.body.appendChild(heart);
+<!-- Geração de corações animados -->
+<script>
+  const emojis = ["💖", "💘", "💗", "❤️", "💕", "💞"];
+  const total = 30;
+
+  for (let i = 0; i < total; i++) {
+    const heart = document.createElement("div");
+    heart.classList.add("heart");
+    heart.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+    heart.style.left = Math.random() * 100 + "vw";
+    heart.style.fontSize = 18 + Math.random() * 20 + "px";
+    heart.style.animationDuration = 5 + Math.random() * 5 + "s";
+    heart.style.animationDelay = Math.random() * 5 + "s";
+    document.body.appendChild(heart);
+  }
+
+  // Contador desde 30/04/2025
+  function atualizarContador() {
+    const inicio = new Date('2025-04-30T00:00:00');
+    const agora = new Date();
+    const diferenca = agora - inicio;
+
+    if (diferenca < 0) {
+      document.getElementById("contador").textContent = "A data ainda não chegou.";
+      return;
     }
-  </script>
+
+    const segundosTotais = Math.floor(diferenca / 1000);
+    const dias = Math.floor(segundosTotais / 86400);
+    const horas = Math.floor((segundosTotais % 86400) / 3600);
+    const minutos = Math.floor((segundosTotais % 3600) / 60);
+    const segundos = segundosTotais % 60;
+
+    document.getElementById("contador").textContent =
+      `${dias}d ${horas}h ${minutos}m ${segundos}s`;
+  }
+
+  setInterval(atualizarContador, 1000);
+  atualizarContador();
+</script>
 </body>
 
 </html>
