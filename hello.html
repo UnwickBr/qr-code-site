@@ -6,33 +6,31 @@
   <title>Contagem</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <style>
-    /* Bloqueia todo scroll e bounce */
+    /* Estilo principal e fundo */
     html,
     body {
       margin: 0;
       padding: 0;
       width: 100%;
       height: 100%;
-      overflow: hidden !important;
+      overflow: hidden;
       overscroll-behavior: none;
       font-family: Arial, sans-serif;
       color: #fff;
       text-align: center;
     }
 
-    /* Container fixo de fundo por baixo de tudo */
     #bg {
       position: fixed;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
-      z-index: 0;
       background: radial-gradient(ellipse at bottom, #0b0c2a 0%, #000 100%);
+      z-index: 0;
       overflow: hidden;
     }
 
-    /* Animações dentro do #bg */
     .estrela,
     .cometa,
     .nuvem,
@@ -41,7 +39,6 @@
       will-change: transform, opacity;
     }
 
-    /* Estrelas piscando */
     .estrela {
       width: 2px;
       height: 2px;
@@ -63,13 +60,12 @@
       }
     }
 
-    /* Cometas */
     .cometa {
       width: 150px;
       height: 2px;
       background: linear-gradient(90deg, transparent, #fff);
-      opacity: .6;
       transform: rotate(60deg);
+      opacity: .6;
       animation: queda 10s ease-in-out infinite;
     }
 
@@ -89,7 +85,6 @@
       }
     }
 
-    /* Nuvens */
     .nuvem {
       width: 200px;
       height: 60px;
@@ -110,7 +105,6 @@
       }
     }
 
-    /* Corações e palavras */
     .heart {
       font-size: 24px;
       opacity: .8;
@@ -134,7 +128,6 @@
       }
     }
 
-    /* Conteúdo em cima do fundo */
     #app {
       position: relative;
       z-index: 1;
@@ -142,7 +135,6 @@
       height: 100%;
     }
 
-    /* Contador central */
     #contador-container {
       position: absolute;
       top: 50%;
@@ -158,7 +150,6 @@
       background-size: 600% 600%;
       animation: gradiente 10s ease infinite;
       display: inline-block;
-      margin-bottom: 20px;
       padding-bottom: 80px;
     }
 
@@ -176,51 +167,11 @@
       }
     }
 
-    #foto-com-borda img {
-      width: 300px;
-      height: 300px;
-      object-fit: cover;
-      border-radius: 8px;
-    }
-
-    #contador {
-      font-size: 1.2rem;
-      font-weight: bold;
-      background: linear-gradient(90deg, #ffffff, #ffffff, #fff);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      animation: gradiente 5s ease infinite;
-      text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.6);
-    }
-
-    /* Visualizador de áudio fixo */
-    #container-visualizador {
-      position: fixed;
-      bottom: 60px;
-      left: 0;
-      right: 0;
-      width: 100%;
-      max-width: 550px;
-      height: 240px;
-      margin: 0 auto;
-      z-index: 3;
-      pointer-events: none;
-      will-change: transform;
-    }
-
-    #visualizador {
-      width: 100%;
-      height: 100%;
-      display: block;
-      pointer-events: none;
-      will-change: contents;
-    }
-
     .carrossel-container {
-      width: 100%;
-      max-width: 320px;
+      width: 300px;
+      max-width: 90vw;
       overflow: hidden;
-      margin: 20px auto 0;
+      margin: 0 auto;
       position: relative;
     }
 
@@ -232,39 +183,47 @@
     .carrossel img {
       width: 100%;
       flex-shrink: 0;
-      border-radius: 12px;
+      border-radius: 10px;
       object-fit: cover;
     }
 
     .indicadores {
       display: flex;
       justify-content: center;
-      gap: 8px;
-      margin-top: 10px;
+      gap: 6px;
+      margin-top: 12px;
     }
 
     .indicadores span {
       width: 8px;
       height: 8px;
-      background: #ffffff44;
       border-radius: 50%;
-      display: inline-block;
-      transition: background 0.3s ease;
+      background: #ffffff33;
+      transition: background 0.3s;
     }
 
     .indicadores span.ativo {
       background: #fff;
     }
 
+    #contador {
+      font-size: 1.2rem;
+      font-weight: bold;
+      background: linear-gradient(90deg, #ffffff, #fff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: gradiente 5s ease infinite;
+      text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.6);
+    }
 
     h1 {
       font-size: 1rem;
-      margin-bottom: 10px;
+      margin: 15px 0 10px;
       text-shadow: 1px 1px 4px #000;
     }
 
     h1::before {
-      content: "💗";
+      content: "\1F497";
       margin-right: 8px;
       animation: pulse 1s infinite;
     }
@@ -282,56 +241,36 @@
         transform: scale(1)
       }
     }
-
-    @media only screen and (max-width: 600px) {
-
-      /* para telas até 600px de largura (mobile) */
-      #container-visualizador {
-        bottom: -15px;
-        /* desce o visualizador um pouco mais */
-      }
-    }
   </style>
 </head>
 
 <body>
-
-  <!-- Fundo animado -->
   <div id="bg"></div>
-
-  <!-- Aplicação (conteúdo) -->
   <div id="app">
-    <!-- Áudio -->
     <audio id="player" autoplay loop crossorigin="anonymous">
-      <source src="https://unwickbr.github.io/qr-code-site/Terça.mp3" type="audio/mpeg">
+      <source src="https://unwickbr.github.io/qr-code-site/Ter%C3%A7a.mp3" type="audio/mpeg">
     </audio>
 
-    <!-- Carrossel de fotos -->
-    <div class="carrossel-container">
-      <div class="carrossel" id="carrossel">
-        <img src="https://unwickbr.github.io/qr-code-site/Image.jpg" alt="1">
-        <img src="https://unwickbr.github.io/qr-code-site/Image2.jpg" alt="2">
-        <img src="https://unwickbr.github.io/qr-code-site/Image3.jpg" alt="3">
-        <img src="https://unwickbr.github.io/qr-code-site/Image4.jpg" alt="4">
+    <div id="contador-container">
+      <div id="foto-com-borda">
+        <div class="carrossel-container">
+          <div class="carrossel" id="carrossel">
+            <img src="https://unwickbr.github.io/qr-code-site/Image.jpg" alt="1">
+            <img src="https://unwickbr.github.io/qr-code-site/foto2.jpg" alt="2">
+            <img src="https://unwickbr.github.io/qr-code-site/foto3.jpg" alt="3">
+          </div>
+          <div class="indicadores" id="indicadores">
+            <span></span><span></span><span></span>
+          </div>
+        </div>
+        <h1>Quanto tempo nos conhecemos:</h1>
+        <div id="contador">Calculando...</div>
       </div>
-      <div class="indicadores" id="indicadores">
-        <span></span>
-        <span></span>
-        <span></span>
-      </div>
-    </div>
-
-    <!-- Visualizador de áudio -->
-    <div id="container-visualizador">
-      <canvas id="visualizador" width="300" height="240"></canvas>
     </div>
   </div>
-
   <script>
     document.addEventListener('DOMContentLoaded', () => {
       const bg = document.getElementById('bg');
-
-      // Estrelas
       for (let i = 0; i < 150; i++) {
         const s = document.createElement('div');
         s.className = 'estrela';
@@ -340,7 +279,6 @@
         s.style.animationDuration = 1 + Math.random() * 2 + 's';
         bg.appendChild(s);
       }
-      // Cometas
       for (let i = 0; i < 5; i++) {
         const c = document.createElement('div');
         c.className = 'cometa';
@@ -349,7 +287,6 @@
         c.style.animationDelay = Math.random() * 20 + 's';
         bg.appendChild(c);
       }
-      // Nuvens
       for (let i = 0; i < 7; i++) {
         const n = document.createElement('div');
         n.className = 'nuvem';
@@ -358,7 +295,6 @@
         n.style.animationDuration = 60 + Math.random() * 40 + 's';
         bg.appendChild(n);
       }
-      // Corações e textos
       const emojis = ['💖', '💘', '💗', '❤️', '💕', '💞'];
       const textos = ['Linda', 'Maravilhosa', 'Deusa', 'Perfeita', 'Gatona', 'Meu amor', '0 defeitos', 'Te amo 💖'];
       for (let i = 0; i < 25; i++) {
@@ -375,63 +311,41 @@
         bg.appendChild(h);
       }
 
-      // Visualizador de áudio
-      const audio = document.getElementById('player');
-      audio.volume = 0.5;
-      const canvas = document.getElementById('visualizador');
-      const ctx = canvas.getContext('2d');
-      const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-      const source = audioCtx.createMediaElementSource(audio);
-      const analyser = audioCtx.createAnalyser();
-      analyser.fftSize = 32;
-      source.connect(analyser);
-      analyser.connect(audioCtx.destination);
-      const dataArray = new Uint8Array(analyser.frequencyBinCount);
-
-      function draw() {
-        requestAnimationFrame(draw);
-        analyser.getByteFrequencyData(dataArray);
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-        const barW = 5.5, gap = 4, n = 30, cx = canvas.width / 2;
-        for (let i = 0; i < n / 2; i++) {
-          const h = (dataArray[i] / 255) * canvas.height * 0.1;
-          const y = (canvas.height - h) / 2 - 95;
-          ctx.fillStyle = '#fff';
-          ctx.fillRect(cx + i * (barW + gap), y, barW, h);
-          ctx.fillRect(cx - (i + 1) * (barW + gap), y, barW, h);
-        }
+      // Carrossel
+      const carrossel = document.getElementById('carrossel');
+      const indicadores = document.getElementById('indicadores').children;
+      const totalSlides = carrossel.children.length;
+      let slideAtual = 0;
+      function atualizarCarrossel() {
+        carrossel.style.transform = `translateX(-${slideAtual * 100}%)`;
+        Array.from(indicadores).forEach((dot, i) => {
+          dot.classList.toggle('ativo', i === slideAtual);
+        });
       }
-      window.addEventListener('click', () => {
-        if (audioCtx.state === 'suspended') audioCtx.resume();
-        audio.play();
-      });
-      draw();
+      setInterval(() => {
+        slideAtual = (slideAtual + 1) % totalSlides;
+        atualizarCarrossel();
+      }, 4000);
+      atualizarCarrossel();
 
       // Contador
       function atualizarContador() {
         const inicio = new Date('2025-04-30T00:00:00');
         const agora = new Date();
         const diferenca = agora - inicio;
-
         if (diferenca < 0) {
           document.getElementById("contador").textContent = "A data ainda não chegou.";
           return;
         }
-
         let segundosTotais = Math.floor(diferenca / 1000);
-
         const meses = Math.floor(segundosTotais / (60 * 60 * 24 * 30));
         segundosTotais %= (60 * 60 * 24 * 30);
-
         const dias = Math.floor(segundosTotais / (60 * 60 * 24));
         segundosTotais %= (60 * 60 * 24);
-
         const horas = Math.floor(segundosTotais / 3600);
         segundosTotais %= 3600;
-
         const minutos = Math.floor(segundosTotais / 60);
         const segundos = segundosTotais % 60;
-
         document.getElementById("contador").textContent =
           `${meses}M ${dias}d ${horas}hr ${minutos}min ${segundos}s`;
       }
