@@ -260,8 +260,9 @@
       padding: 16px 24px;
       border-radius: 12px;
       font-size: 1.2rem;
+      text-shadow: 6px 6px 6px #000000;
       font-weight: 900;
-      color: #fff;
+      color: #ffffff;
       line-height: 1.4;
       text-align: left;
       text-transform: uppercase;
@@ -474,38 +475,38 @@
       const lyricsContainer = document.getElementById('lyrics-container');
       const lyrics = [
         { time: 0.82, text: "Terça de tarde" },
-        { time: 2.24, text: "O tempo passa\n e eu com ela" },
-        { time: 3.85, text: "Não quero que\n nunca passe" },
-        { time: 5.51, text: "Minha brisa é\n o rosto dela" },
-        { time: 7.59, text: "Já disse até\n pra mim:" },
-        { time: 9.18, text: "Sem mais som\n de amor" },
-        { time: 10.51, text: "Mas ficar\n sem escrever" },
-        { time: 12.43, text: "Pra ela\n me dá\n até dor" },
+        { time: 2.24, text: "O tempo passa\ne eu com ela" },
+        { time: 3.85, text: "Não quero que\nnunca passe" },
+        { time: 5.51, text: "Minha brisa é\no rosto dela" },
+        { time: 7.59, text: "Já disse até\npra mim:" },
+        { time: 9.18, text: "Sem mais som\nde amor" },
+        { time: 10.51, text: "Mas ficar\nsem escrever" },
+        { time: 12.43, text: "Pra ela\nme dá\naté dor" },
         { time: 13.67, text: "Terça de tarde" },
-        { time: 15.31, text: "Eu tô\n cansado do\n meu trampo" },
-        { time: 17.05, text: "Mas ver\n ela só me\n olhando" },
-        { time: 18.55, text: "Tá\n me hipnotizando" },
+        { time: 15.31, text: "Eu tô\ncansado do\nmeu trampo" },
+        { time: 17.05, text: "Mas ver\nela só me\nolhando" },
+        { time: 18.55, text: "Tá\nme hipnotizando" },
         { time: 20.69, text: "Então te peço:" },
-        { time: 22.46, text: "Fica\n só\n mais um pouco" },
-        { time: 24.41, text: "Continua\n agora" },
-        { time: 25.58, text: "Bora\n ficar se amando" },
-        { time: 32.35, text: "Bora ficar\n se amando" },
+        { time: 22.46, text: "Fica\nsó\nmais um pouco" },
+        { time: 24.41, text: "Continua\nagora" },
+        { time: 25.58, text: "Bora\nficar se amando" },
+        { time: 32.35, text: "Bora ficar\nse amando" },
         { time: 39.68, text: "Terça de tarde" },
-        { time: 41.78, text: "Ela em cima\n de mim" },
-        { time: 43.26, text: "Me contando\n como foi" },
-        { time: 44.53, text: "Seu dia e\n perguntando" },
+        { time: 41.78, text: "Ela em cima\nde mim" },
+        { time: 43.26, text: "Me contando\ncomo foi" },
+        { time: 44.53, text: "Seu dia e\nperguntando" },
         { time: 47.30, text: "E eu respondo:" },
-        { time: 48.35, text: "Meu dia tá\n melhorando" },
+        { time: 48.35, text: "Meu dia tá\nmelhorando" },
         { time: 49.98, text: "Com você aqui" },
-        { time: 51.23, text: "Tu é uma\n canção e\n eu tô cantando" },
+        { time: 51.23, text: "Tu é uma\ncanção e\n eu tô cantando" },
         { time: 54.67, text: "Terça de tarde" },
-        { time: 55.98, text: "Ela\n sorri" },
-        { time: 56.71, text: "Confesso\n que aquilo foi" },
-        { time: 57.95, text: "A melhor\n coisa que\n eu vi" },
-        { time: 59.54, text: "Deu a\n hora de\n ir embora" },
-        { time: 61.41, text: "Levo\n ela\n pra casa" },
-        { time: 62.97, text: "Volto feliz\n e sem graça" },
-        { time: 64.57, text: "Com um\n sorriso\n na cara" }
+        { time: 55.98, text: "Ela\nsorri" },
+        { time: 56.71, text: "Confesso\nque aquilo foi" },
+        { time: 57.95, text: "A melhor\ncoisa que\neu vi" },
+        { time: 59.54, text: "Deu a\nhora de\nir embora" },
+        { time: 61.41, text: "Levo\nela\npra casa" },
+        { time: 62.97, text: "Volto feliz\ne sem graça" },
+        { time: 64.57, text: "Com um\n orriso\nna cara" }
       ];
 
       let currentLine = -1;
@@ -526,6 +527,10 @@
           palavras.forEach((palavra, i) => {
             const span = document.createElement('span');
             span.className = 'lyrics-word';
+            const min = 1.2;
+            const max = 1.6;
+            const tamanho = (Math.random() * (max - min) + min).toFixed(2);
+            span.style.fontSize = `${tamanho}rem`;
             span.style.animationDelay = `${(linhaIndex * 0.6) + i * 0.1}s`;
             span.textContent = palavra;
             linhaDiv.appendChild(span);
