@@ -254,7 +254,14 @@
       justify-content: center;
     }
 
+    @font-face {
+      font-family: 'Helvetica-Neue-Condensed-Bold';
+      src: url('Helvetica-Neue-Condensed-Bold.ttf') format('truetype');
+      font-weight: bold;
+    }
+
     .lyrics-line {
+      font-family: 'Helvetica-Neue-Condensed-Bold', 'Anton', sans-serif;
       max-width: 100%;
       background: rgba(0, 0, 0, 0);
       padding: 16px 24px;
@@ -263,7 +270,7 @@
       text-shadow: 6px 6px 6px #000000;
       font-weight: 900;
       color: #ffffff;
-      line-height: 1.4;
+      line-height: 0.9;
       text-align: left;
       text-transform: uppercase;
       white-space: pre-line;
@@ -474,34 +481,34 @@
 
       const lyricsContainer = document.getElementById('lyrics-container');
       const lyrics = [
-        { time: 0.82, text: "Terça de tarde" },
-        { time: 2.24, text: "O tempo passa\ne eu com ela" },
-        { time: 3.85, text: "Não quero que\nnunca passe" },
+        { time: 0.82, text: "Terça \nde tarde" },
+        { time: 2.24, text: "O tempo \npassa\ne eu com ela" },
+        { time: 3.85, text: "Não \nquero que\nnunca passe" },
         { time: 5.51, text: "Minha brisa é\no rosto dela" },
-        { time: 7.59, text: "Já disse até\npra mim:" },
-        { time: 9.18, text: "Sem mais som\nde amor" },
+        { time: 7.59, text: "Já \ndisse até\npra mim:" },
+        { time: 9.18, text: "Sem \nmais som\nde amor" },
         { time: 10.51, text: "Mas ficar\nsem escrever" },
         { time: 12.43, text: "Pra ela\nme dá\naté dor" },
         { time: 13.67, text: "Terça de tarde" },
         { time: 15.31, text: "Eu tô\ncansado do\nmeu trampo" },
         { time: 17.05, text: "Mas ver\nela só me\nolhando" },
-        { time: 18.55, text: "Tá\nme hipnotizando" },
-        { time: 20.69, text: "Então te peço:" },
+        { time: 18.55, text: "Tá me \nhipnotizando" },
+        { time: 20.69, text: "Então te \npeço:" },
         { time: 22.46, text: "Fica\nsó\nmais um pouco" },
         { time: 24.41, text: "Continua\nagora" },
-        { time: 25.58, text: "Bora\nficar se amando" },
+        { time: 25.58, text: "Bora\nficar se \namando" },
         { time: 32.35, text: "Bora ficar\nse amando" },
-        { time: 39.68, text: "Terça de tarde" },
-        { time: 41.78, text: "Ela em cima\nde mim" },
+        { time: 39.68, text: "Terça \nde tarde" },
+        { time: 41.78, text: "Ela \nem cima\nde mim" },
         { time: 43.26, text: "Me contando\ncomo foi" },
         { time: 44.53, text: "Seu dia e\nperguntando" },
-        { time: 47.30, text: "E eu respondo:" },
+        { time: 47.30, text: "E eu \nrespondo:" },
         { time: 48.35, text: "Meu dia tá\nmelhorando" },
         { time: 49.98, text: "Com você aqui" },
-        { time: 51.23, text: "Tu é uma\ncanção e\n eu tô cantando" },
-        { time: 54.67, text: "Terça de tarde" },
+        { time: 51.23, text: "Tu é uma\ncanção e\n eu tô \ncantando" },
+        { time: 54.67, text: "Terça \nde tarde" },
         { time: 55.98, text: "Ela\nsorri" },
-        { time: 56.71, text: "Confesso\nque aquilo foi" },
+        { time: 56.71, text: "Confesso\nque aquilo \nfoi" },
         { time: 57.95, text: "A melhor\ncoisa que\neu vi" },
         { time: 59.54, text: "Deu a\nhora de\nir embora" },
         { time: 61.41, text: "Levo\nela\npra casa" },
@@ -527,8 +534,8 @@
           palavras.forEach((palavra, i) => {
             const span = document.createElement('span');
             span.className = 'lyrics-word';
-            const min = 1.2;
-            const max = 1.6;
+            const min = 1.1;
+            const max = 1.8;
             const tamanho = (Math.random() * (max - min) + min).toFixed(2);
             span.style.fontSize = `${tamanho}rem`;
             span.style.animationDelay = `${(linhaIndex * 0.6) + i * 0.1}s`;
@@ -546,9 +553,6 @@
 
         lyricsContainer.appendChild(linhaPrincipal);
       }
-
-
-
 
       setInterval(() => {
         if (audio.readyState >= 2) {
