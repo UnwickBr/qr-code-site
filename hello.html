@@ -245,7 +245,7 @@
     }
     #lyrics-container {
       position: fixed;
-      bottom: 5%;
+      bottom: 10%;
       width: 100%;
       text-align: center;
       z-index: 4;
@@ -256,7 +256,7 @@
 
     .lyrics-line {
       color: white;
-      text-shadow: 4px 4px 4px #000;
+      text-shadow: 1px 1px 4px #000;
       animation: fadeInOut 4s ease-in-out forwards;
     }
 
@@ -435,25 +435,38 @@
       const lyricsContainer = document.getElementById('lyrics-container');
       const lyrics = [
         { time: 0.82, text: "Terça de tarde" },
-        { time: 0.99, text: "O tempo passa e eu com ela" },
-        { time: 3.92, text: "Não quero que nunca passe" },
-        { time: 4.92, text: "Minha brisa é o rosto dela" },
-        { time: 7.85, text: "Já disse até pra mim: Sem mais som de amor" },
-        { time: 10.60, text: "Mas ficar sem escrever pra ela me dá até dor" },
-        { time: 13.69, text: "Terça de tarde, eu tô cansado do meu trampo" },
-        { time: 17.05, text: "Mas ver ela só me olhando tá me hipnotizando" },
-        { time: 20.95, text: "Então te peço: Fica só mais um pouco" },
-        { time: 24.55, text: "Continua agora, bora ficar se amando" },
-        { time: 32.76, text: "Bora ficar se amando" },
-        { time: 39.98, text: "Terça de tarde, ela em cima de mim" },
-        { time: 43.45, text: "Me contando como foi seu dia e perguntando" },
-        { time: 47.21, text: "E eu respondo: Meu dia tá melhorando com você aqui" },
-        { time: 51.00, text: "Tu é uma canção e eu tô cantando" },
-        { time: 54.77, text: "Terça de tarde, ela sorri" },
-        { time: 56.62, text: "Confesso que aquilo foi a melhor coisa que eu vi" },
-        { time: 59.92, text: "Deu a hora de ir embora, levo ela pra casa" },
-        { time: 63.17, text: "Volto feliz e sem graça com um sorriso na cara" },
-
+        { time: 2.24, text: "O tempo passa e eu com ela" },
+        { time: 3.85, text: "Não quero que nunca passe" },
+        { time: 5.51, text: "Minha brisa é o rosto dela" },
+        { time: 7.59, text: "Já disse até pra mim:" },
+        { time: 9.18, text: "Sem mais som de amor" },
+        { time: 10.51, text: "Mas ficar sem escrever" },
+        { time: 12.43, text: "Pra ela me dá até dor" },
+        { time: 13.67, text: "Terça de tarde" },
+        { time: 15.31, text: "Eu tô cansado do meu trampo" },
+        { time: 17.05, text: "Mas ver ela só me olhando" },
+        { time: 18.55, text: "Tá me hipnotizando" },
+        { time: 20.69, text: "Então te peço:" },
+        { time: 22.46, text: "Fica só mais um pouco" },
+        { time: 24.41, text: "Continua agora" },
+        { time: 25.58, text: "Bora ficar se amando" },
+        { time: 32.35, text: "Bora ficar se amando" },
+        { time: 39.68, text: "Terça de tarde" },
+        { time: 41.78, text: "Ela em cima de mim" },
+        { time: 43.26, text: "Me contando como foi" },
+        { time: 44.53, text: "Seu dia e perguntando" },
+        { time: 47.30, text: "E eu respondo:" },
+        { time: 48.35, text: "Meu dia tá melhorando" },
+        { time: 49.98, text: "Com você aqui" },
+        { time: 51.23, text: "Tu é uma canção e eu tô cantando" },
+        { time: 54.67, text: "Terça de tarde" },
+        { time: 55.98, text: "Ela sorri" },
+        { time: 56.71, text: "Confesso que aquilo foi" },
+        { time: 57.95, text: "A melhor coisa que eu vi" },
+        { time: 59.54, text: "Deu a hora de ir embora" },
+        { time: 61.41, text: "Levo ela pra casa" },
+        { time: 62.97, text: "Volto feliz e sem graça" },
+        { time: 64.57, text: "Com um sorriso na cara" }
       ];
 
       let currentLine = -1;
