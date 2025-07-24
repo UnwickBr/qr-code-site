@@ -245,28 +245,50 @@
     }
     #lyrics-container {
       position: fixed;
-      bottom: 10%;
+      bottom: 14%;
       width: 100%;
-      text-align: center;
-      z-index: 4;
-      font-size: 1rem;
-      font-weight: bold;
+      z-index: 20;
       pointer-events: none;
+      padding: 0 5vw;
+      display: flex;
+      justify-content: center;
     }
 
     .lyrics-line {
-      color: white;
-      text-shadow: 1px 1px 4px #000;
-      animation: fadeInOut 4s ease-in-out forwards;
+      max-width: 100%;
+      background: rgba(0, 0, 0, 0.75);
+      padding: 16px 24px;
+      border-radius: 12px;
+      font-size: 2.2rem;
+      font-weight: 900;
+      color: #fff;
+      line-height: 1.4;
+      text-align: center;
+      text-transform: uppercase;
+      white-space: pre-line;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.5);
+      animation: entradaReels 0.6s ease-out forwards;
+      opacity: 0;
+      transform: translateY(20px);
     }
 
-    @keyframes fadeInOut {
-      0%   { opacity: 0; transform: translateY(10px); }
-      10%  { opacity: 1; transform: translateY(0); }
-      90%  { opacity: 1; transform: translateY(0); }
-      100% { opacity: 0; transform: translateY(-10px); }
+    @keyframes entradaReels {
+      0% {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
 
+    @media (max-width: 600px) {
+      .lyrics-line {
+        font-size: 1.6rem;
+        padding: 14px 20px;
+      }
+    }
 
     #visualizador {
       width: 100%;
@@ -435,38 +457,38 @@
       const lyricsContainer = document.getElementById('lyrics-container');
       const lyrics = [
         { time: 0.82, text: "Terça de tarde" },
-        { time: 2.24, text: "O tempo passa e eu com ela" },
-        { time: 3.85, text: "Não quero que nunca passe" },
-        { time: 5.51, text: "Minha brisa é o rosto dela" },
-        { time: 7.59, text: "Já disse até pra mim:" },
-        { time: 9.18, text: "Sem mais som de amor" },
-        { time: 10.51, text: "Mas ficar sem escrever" },
-        { time: 12.43, text: "Pra ela me dá até dor" },
+        { time: 2.24, text: "O tempo passa\n e eu com ela" },
+        { time: 3.85, text: "Não quero que\n nunca passe" },
+        { time: 5.51, text: "Minha brisa é\n o rosto dela" },
+        { time: 7.59, text: "Já disse até\n pra mim:" },
+        { time: 9.18, text: "Sem mais som\n de amor" },
+        { time: 10.51, text: "Mas ficar\n sem escrever" },
+        { time: 12.43, text: "Pra ela\n me dá\n até dor" },
         { time: 13.67, text: "Terça de tarde" },
-        { time: 15.31, text: "Eu tô cansado do meu trampo" },
-        { time: 17.05, text: "Mas ver ela só me olhando" },
-        { time: 18.55, text: "Tá me hipnotizando" },
+        { time: 15.31, text: "Eu tô\n cansado do\n meu trampo" },
+        { time: 17.05, text: "Mas ver\n ela só me\n olhando" },
+        { time: 18.55, text: "Tá\n me hipnotizando" },
         { time: 20.69, text: "Então te peço:" },
-        { time: 22.46, text: "Fica só mais um pouco" },
-        { time: 24.41, text: "Continua agora" },
-        { time: 25.58, text: "Bora ficar se amando" },
-        { time: 32.35, text: "Bora ficar se amando" },
+        { time: 22.46, text: "Fica\n só\n mais um pouco" },
+        { time: 24.41, text: "Continua\n agora" },
+        { time: 25.58, text: "Bora\n ficar se amando" },
+        { time: 32.35, text: "Bora ficar\n se amando" },
         { time: 39.68, text: "Terça de tarde" },
-        { time: 41.78, text: "Ela em cima de mim" },
-        { time: 43.26, text: "Me contando como foi" },
-        { time: 44.53, text: "Seu dia e perguntando" },
+        { time: 41.78, text: "Ela em cima\n de mim" },
+        { time: 43.26, text: "Me contando\n como foi" },
+        { time: 44.53, text: "Seu dia e\n perguntando" },
         { time: 47.30, text: "E eu respondo:" },
-        { time: 48.35, text: "Meu dia tá melhorando" },
+        { time: 48.35, text: "Meu dia tá\n melhorando" },
         { time: 49.98, text: "Com você aqui" },
-        { time: 51.23, text: "Tu é uma canção e eu tô cantando" },
+        { time: 51.23, text: "Tu é uma\n canção e\n eu tô cantando" },
         { time: 54.67, text: "Terça de tarde" },
-        { time: 55.98, text: "Ela sorri" },
-        { time: 56.71, text: "Confesso que aquilo foi" },
-        { time: 57.95, text: "A melhor coisa que eu vi" },
-        { time: 59.54, text: "Deu a hora de ir embora" },
-        { time: 61.41, text: "Levo ela pra casa" },
-        { time: 62.97, text: "Volto feliz e sem graça" },
-        { time: 64.57, text: "Com um sorriso na cara" }
+        { time: 55.98, text: "Ela\n sorri" },
+        { time: 56.71, text: "Confesso\n que aquilo foi" },
+        { time: 57.95, text: "A melhor\n coisa que\n eu vi" },
+        { time: 59.54, text: "Deu a\n hora de\n ir embora" },
+        { time: 61.41, text: "Levo\n ela\n pra casa" },
+        { time: 62.97, text: "Volto feliz\n e sem graça" },
+        { time: 64.57, text: "Com um\n sorriso\n na cara" }
       ];
 
       let currentLine = -1;
