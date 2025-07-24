@@ -245,7 +245,7 @@
     }
     #lyrics-container {
       position: fixed;
-      bottom: 5%;
+      bottom: 1%;
       width: 100%;
       z-index: 20;
       pointer-events: none;
@@ -259,7 +259,7 @@
       background: rgba(0, 0, 0, 0);
       padding: 16px 24px;
       border-radius: 12px;
-      font-size: 1.8rem;
+      font-size: 1.2rem;
       font-weight: 900;
       color: #fff;
       line-height: 1.4;
@@ -293,7 +293,7 @@
       display: inline-block;
       opacity: 0;
       transform: translateY(20px);
-      animation: entradaReelsPalavra 0.5s ease-out forwards;
+      animation: entradaReelsPalavra 0.2s ease-out forwards;
     }
 
     @keyframes entradaReelsPalavra {
@@ -526,9 +526,14 @@
           palavras.forEach((palavra, i) => {
             const span = document.createElement('span');
             span.className = 'lyrics-word';
-            span.style.animationDelay = `${(linhaIndex * 0.6) + i * 0.2}s`;
-            span.textContent = palavra + ' ';
+            span.style.animationDelay = `${(linhaIndex * 0.6) + i * 0.1}s`;
+            span.textContent = palavra;
             linhaDiv.appendChild(span);
+
+            // Adiciona um espaço real entre palavras
+            if (i < palavras.length - 1) {
+              linhaDiv.appendChild(document.createTextNode('\u00A0'));
+            }
           });
 
           linhaPrincipal.appendChild(linhaDiv);
@@ -536,6 +541,7 @@
 
         lyricsContainer.appendChild(linhaPrincipal);
       }
+
 
 
 
