@@ -243,6 +243,29 @@
       pointer-events: none;
       will-change: transform;
     }
+    #lyrics-container {
+    position: fixed;
+    bottom: 10%;
+    width: 100%;
+    text-align: center;
+    z-index: 4;
+    font-size: 1rem;
+    font-weight: bold;
+    pointer-events: none;
+    }
+    .lyrics-line {
+      opacity: 0;
+      color: white;
+      text-shadow: 1px 1px 4px #000;
+      animation: fadeInOut 4s ease-in-out forwards;
+      animation-delay: var(--delay);
+    }
+    @keyframes fadeInOut {
+      0% { opacity: 0; transform: translateY(10px); }
+      10% { opacity: 1; transform: translateY(0); }
+      90% { opacity: 1; transform: translateY(0); }
+      100% { opacity: 0; transform: translateY(-10px); }
+    }
 
     #visualizador {
       width: 100%;
@@ -300,6 +323,12 @@
   </div>
   <div id="bg"></div>
   <div id="app">
+  <div id="lyrics-container">
+  <div class="lyrics-line" style="--delay:0s;">🌙 Quando a noite cai</div>
+  <div class="lyrics-line" style="--delay:4s;">✨ E as estrelas brilham só pra nós dois</div>
+  <div class="lyrics-line" style="--delay:8s;">💫 Tudo parece parar</div>
+  <div class="lyrics-line" style="--delay:12s;">❤️ Só pra ouvir tua voz</div>
+</div>
     <audio id="player" autoplay loop crossorigin="anonymous">
       <source src="https://unwickbr.github.io/qr-code-site/Ter%C3%A7a.mp3" type="audio/mpeg">
     </audio>
