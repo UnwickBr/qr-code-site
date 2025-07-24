@@ -216,6 +216,47 @@
       will-change: contents;
     }
 
+    .carrossel-container {
+      width: 100%;
+      max-width: 320px;
+      overflow: hidden;
+      margin: 20px auto 0;
+      position: relative;
+    }
+
+    .carrossel {
+      display: flex;
+      transition: transform 0.5s ease-in-out;
+    }
+
+    .carrossel img {
+      width: 100%;
+      flex-shrink: 0;
+      border-radius: 12px;
+      object-fit: cover;
+    }
+
+    .indicadores {
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      margin-top: 10px;
+    }
+
+    .indicadores span {
+      width: 8px;
+      height: 8px;
+      background: #ffffff44;
+      border-radius: 50%;
+      display: inline-block;
+      transition: background 0.3s ease;
+    }
+
+    .indicadores span.ativo {
+      background: #fff;
+    }
+
+
     h1 {
       font-size: 1rem;
       margin-bottom: 10px;
@@ -265,12 +306,17 @@
       <source src="https://unwickbr.github.io/qr-code-site/Terça.mp3" type="audio/mpeg">
     </audio>
 
-    <!-- Contador com foto -->
-    <div id="contador-container">
-      <div id="foto-com-borda">
-        <img src="https://unwickbr.github.io/qr-code-site/Image.jpg" alt="Foto especial">
-        <h1>Quanto tempo nos conhecemos:</h1>
-        <div id="contador">Calculando...</div>
+    <!-- Carrossel de fotos -->
+    <div class="carrossel-container">
+      <div class="carrossel" id="carrossel">
+        <img src="https://unwickbr.github.io/qr-code-site/Image.jpg" alt="1">
+        <img src="https://unwickbr.github.io/qr-code-site/foto2.jpg" alt="2">
+        <img src="https://unwickbr.github.io/qr-code-site/foto3.jpg" alt="3">
+      </div>
+      <div class="indicadores" id="indicadores">
+        <span></span>
+        <span></span>
+        <span></span>
       </div>
     </div>
 
