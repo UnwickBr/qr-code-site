@@ -289,6 +289,23 @@
         padding: 14px 20px;
       }
     }
+    .lyrics-word {
+      display: inline-block;
+      opacity: 0;
+      transform: translateY(20px);
+      animation: entradaReelsPalavra 0.5s ease-out forwards;
+    }
+
+    @keyframes entradaReelsPalavra {
+      0% {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
 
     #visualizador {
       width: 100%;
@@ -495,11 +512,23 @@
 
       function mostrarLetra(index) {
         lyricsContainer.innerHTML = '';
+
         const linha = document.createElement('div');
         linha.className = 'lyrics-line';
-        linha.textContent = lyrics[index].text;
+
+        const palavras = lyrics[index].text.split(' ');
+
+        palavras.forEach((palavra, i) => {
+          const span = document.createElement('span');
+          span.className = 'lyrics-word';
+          span.style.animationDelay = `${i * 0.2}s`;
+          span.textContent = palavra + ' ';
+          linha.appendChild(span);
+        });
+
         lyricsContainer.appendChild(linha);
       }
+
 
       setInterval(() => {
         if (audio.readyState >= 2) {
