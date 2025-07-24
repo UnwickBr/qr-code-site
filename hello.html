@@ -513,21 +513,30 @@
       function mostrarLetra(index) {
         lyricsContainer.innerHTML = '';
 
-        const linha = document.createElement('div');
-        linha.className = 'lyrics-line';
+        const linhaPrincipal = document.createElement('div');
+        linhaPrincipal.className = 'lyrics-line';
 
-        const palavras = lyrics[index].text.split(' ');
+        const linhas = lyrics[index].text.split('\n');
 
-        palavras.forEach((palavra, i) => {
-          const span = document.createElement('span');
-          span.className = 'lyrics-word';
-          span.style.animationDelay = `${i * 0.2}s`;
-          span.textContent = palavra + ' ';
-          linha.appendChild(span);
+        linhas.forEach((linhaTexto, linhaIndex) => {
+          const linhaDiv = document.createElement('div');
+          linhaDiv.style.display = 'block';
+
+          const palavras = linhaTexto.split(' ');
+          palavras.forEach((palavra, i) => {
+            const span = document.createElement('span');
+            span.className = 'lyrics-word';
+            span.style.animationDelay = `${(linhaIndex * 0.6) + i * 0.2}s`;
+            span.textContent = palavra + ' ';
+            linhaDiv.appendChild(span);
+          });
+
+          linhaPrincipal.appendChild(linhaDiv);
         });
 
-        lyricsContainer.appendChild(linha);
+        lyricsContainer.appendChild(linhaPrincipal);
       }
+
 
 
       setInterval(() => {
