@@ -482,9 +482,12 @@
       setInterval(() => {
         if (audio.readyState >= 2) {
           const tempoAtual = Math.floor(audio.currentTime);
+          const offset = 0.4; // ajusta o tempo em segundos
           const novaLinha = lyrics.findIndex((l, i) =>
-            tempoAtual >= l.time && (i === lyrics.length - 1 || tempoAtual < lyrics[i + 1].time)
+            (audio.currentTime >= (l.time - offset)) &&
+            (i === lyrics.length - 1 || audio.currentTime < (lyrics[i + 1].time - offset))
           );
+
           if (novaLinha !== currentLine) {
             currentLine = novaLinha;
             if (novaLinha !== -1) mostrarLetra(novaLinha);
