@@ -243,6 +243,7 @@
       pointer-events: none;
       will-change: transform;
     }
+
     #lyrics-container {
       position: fixed;
       bottom: 1%;
@@ -275,7 +276,7 @@
       text-transform: uppercase;
       white-space: pre-line;
       /*box-shadow: 0 4px 16px rgba(0,0,0,0.5);*/
-      animation: entradaReels 0.4s ease-out forwards; 
+      animation: entradaReels 0.4s ease-out forwards;
       opacity: 0;
       transform: translateY(20px);
     }
@@ -285,6 +286,7 @@
         opacity: 0;
         transform: translateY(20px);
       }
+
       100% {
         opacity: 1;
         transform: translateY(0);
@@ -297,6 +299,7 @@
         padding: 14px 20px;
       }
     }
+
     .lyrics-word {
       display: inline-block;
       opacity: 0;
@@ -309,6 +312,7 @@
         opacity: 0;
         transform: translateY(20px);
       }
+
       100% {
         opacity: 1;
         transform: translateY(0);
@@ -371,8 +375,8 @@
   </div>
   <div id="bg"></div>
   <div id="app">
-  <div id="lyrics-container">
-</div>
+    <div id="lyrics-container">
+    </div>
     <audio id="player" autoplay loop crossorigin="anonymous">
       <source src="https://unwickbr.github.io/qr-code-site/Ter%C3%A7a.mp3" type="audio/mpeg">
     </audio>
@@ -481,39 +485,45 @@
 
       const lyricsContainer = document.getElementById('lyrics-container');
       const lyrics = [
-        { time: 0.82, text: "Terça \nde tarde" },
-        { time: 2.24, text: "O tempo \npassa\ne eu com ela" },
-        { time: 3.85, text: "Não \nquero que\nnunca passe" },
-        { time: 5.51, text: "Minha brisa é\no rosto dela" },
+        { time: 0.45, text: "Terça \nde tarde" },
+        { time: 2.00, text: "O tempo \npassa\ne eu com ela" },
+        { time: 3.50, text: "Não \nquero que\nnunca passe" },
+        { time: 5.10, text: "Minha brisa é\no rosto dela" },
         { time: 7.59, text: "Já \ndisse até\npra mim:" },
         { time: 9.00, text: "Sem \nmais som\nde amor" },
-        { time: 10.51, text: "Mas ficar\nsem escrever" },
-        { time: 12.43, text: "Pra ela\nme dá\naté dor" },
-        { time: 13.67, text: "Terça de tarde" },
-        { time: 15.31, text: "Eu tô\ncansado do\nmeu trampo" },
-        { time: 17.05, text: "Mas ver\nela só me\nolhando" },
-        { time: 18.55, text: "Tá me \nhipnotizando" },
+        { time: 9.99, text: "Mas ficar\nsem escrever" },
+        { time: 11.43, text: "Pra ela\nme dá\naté dor" },
+        { time: 12.88, text: "Terça de tarde" },
+        { time: 14.42, text: "Eu tô\ncansado do\nmeu trampo" },
+        { time: 16.75, text: "Mas ver\nela só me\nolhando" },
+        { time: 18.20, text: "Tá me \nhipnotizando" },
         { time: 20.69, text: "Então te \npeço:" },
         { time: 22.46, text: "Fica\nsó\nmais um pouco" },
-        { time: 24.41, text: "Continua\nagora" },
-        { time: 25.58, text: "Bora\nficar se \namando" },
+        { time: 24.30, text: "Continua\nagora" },
+        { time: 25.55, text: "Bora\nficar se \namando" },
+        { time: 29.00, text: "Yeah Yeah" },
         { time: 32.35, text: "Bora ficar\nse amando" },
+        { time: 33.80, text: "Bora ficar" },
+        { time: 35.99, text: "Yaaah Yeeeah" },
         { time: 39.68, text: "Terça \nde tarde" },
-        { time: 41.78, text: "Ela \nem cima\nde mim" },
-        { time: 43.26, text: "Me contando\ncomo foi" },
-        { time: 44.53, text: "Seu dia e\nperguntando" },
-        { time: 47.30, text: "E eu \nrespondo:" },
-        { time: 48.35, text: "Meu dia tá\nmelhorando" },
-        { time: 49.98, text: "Com você aqui" },
-        { time: 51.23, text: "Tu é uma\ncanção e\n eu tô \ncantando" },
+        { time: 41.76, text: "Ela \nem cima\nde mim" },
+        { time: 43.11, text: "Me contando" },
+        { time: 44.10, text: "Como foi\nSeu dia" },
+        { time: 45.00, text: "E\nperguntando" },
+        { time: 47.27, text: "E eu \nrespondo:" },
+        { time: 48.25, text: "Meu dia tá\nmelhorando" },
+        { time: 49.85, text: "Com você aqui" },
+        { time: 51.23, text: "Tu é uma\ncanção" },
+        { time: 52.23, text: "E\n eu tô \ncantando" },
+        { time: 53.23, text: "Yeah" },
         { time: 54.67, text: "Terça \nde tarde" },
-        { time: 55.98, text: "Ela\nsorri" },
+        { time: 55.88, text: "Ela\nsorri" },
         { time: 56.71, text: "Confesso\nque aquilo \nfoi" },
         { time: 57.95, text: "A melhor\ncoisa que\neu vi" },
         { time: 59.54, text: "Deu a\nhora de\nir embora" },
         { time: 61.41, text: "Levo\nela\npra casa" },
         { time: 62.97, text: "Volto feliz\ne sem graça" },
-        { time: 64.57, text: "Com um\n orriso\nna cara" }
+        { time: 64.49, text: "Com um\nSorriso\nna cara" }
       ];
 
       let currentLine = -1;
@@ -534,7 +544,7 @@
           palavras.forEach((palavra, i) => {
             const span = document.createElement('span');
             span.className = 'lyrics-word';
-            span.style.animationDelay = `${(linhaIndex * 0.6) + i * 0.1}s`;
+            span.style.animationDelay = `${(linhaIndex * 0.3) + i * 0.1}s`;
 
             // Tamanho aleatório entre 1.0rem e 1.6rem
             const minSize = 1.0;
