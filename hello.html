@@ -244,28 +244,29 @@
       will-change: transform;
     }
     #lyrics-container {
-    position: fixed;
-    bottom: 10%;
-    width: 100%;
-    text-align: center;
-    z-index: 4;
-    font-size: 1rem;
-    font-weight: bold;
-    pointer-events: none;
+      position: fixed;
+      bottom: 5%;
+      width: 100%;
+      text-align: center;
+      z-index: 4;
+      font-size: 1rem;
+      font-weight: bold;
+      pointer-events: none;
     }
+
     .lyrics-line {
-      opacity: 0;
       color: white;
-      text-shadow: 1px 1px 4px #000;
+      text-shadow: 4px 4px 4px #000;
       animation: fadeInOut 4s ease-in-out forwards;
-      animation-delay: var(--delay);
     }
+
     @keyframes fadeInOut {
-      0% { opacity: 0; transform: translateY(10px); }
-      10% { opacity: 1; transform: translateY(0); }
-      90% { opacity: 1; transform: translateY(0); }
+      0%   { opacity: 0; transform: translateY(10px); }
+      10%  { opacity: 1; transform: translateY(0); }
+      90%  { opacity: 1; transform: translateY(0); }
       100% { opacity: 0; transform: translateY(-10px); }
     }
+
 
     #visualizador {
       width: 100%;
@@ -324,10 +325,6 @@
   <div id="bg"></div>
   <div id="app">
   <div id="lyrics-container">
-  <div class="lyrics-line" style="--delay:0s;">🌙 Quando a noite cai</div>
-  <div class="lyrics-line" style="--delay:4s;">✨ E as estrelas brilham só pra nós dois</div>
-  <div class="lyrics-line" style="--delay:8s;">💫 Tudo parece parar</div>
-  <div class="lyrics-line" style="--delay:12s;">❤️ Só pra ouvir tua voz</div>
 </div>
     <audio id="player" autoplay loop crossorigin="anonymous">
       <source src="https://unwickbr.github.io/qr-code-site/Ter%C3%A7a.mp3" type="audio/mpeg">
@@ -434,6 +431,53 @@
         audio.play();
       });
       draw();
+
+      const lyricsContainer = document.getElementById('lyrics-container');
+      const lyrics = [
+        { time: 0.82, text: "Terça de tarde" },
+        { time: 0.99, text: "O tempo passa e eu com ela" },
+        { time: 3.92, text: "Não quero que nunca passe" },
+        { time: 4.92, text: "Minha brisa é o rosto dela" },
+        { time: 7.85, text: "Já disse até pra mim: Sem mais som de amor" },
+        { time: 10.60, text: "Mas ficar sem escrever pra ela me dá até dor" },
+        { time: 13.69, text: "Terça de tarde, eu tô cansado do meu trampo" },
+        { time: 17.05, text: "Mas ver ela só me olhando tá me hipnotizando" },
+        { time: 20.95, text: "Então te peço: Fica só mais um pouco" },
+        { time: 24.55, text: "Continua agora, bora ficar se amando" },
+        { time: 32.76, text: "Bora ficar se amando" },
+        { time: 39.98, text: "Terça de tarde, ela em cima de mim" },
+        { time: 43.45, text: "Me contando como foi seu dia e perguntando" },
+        { time: 47.21, text: "E eu respondo: Meu dia tá melhorando com você aqui" },
+        { time: 51.00, text: "Tu é uma canção e eu tô cantando" },
+        { time: 54.77, text: "Terça de tarde, ela sorri" },
+        { time: 56.62, text: "Confesso que aquilo foi a melhor coisa que eu vi" },
+        { time: 59.92, text: "Deu a hora de ir embora, levo ela pra casa" },
+        { time: 63.17, text: "Volto feliz e sem graça com um sorriso na cara" },
+
+      ];
+
+      let currentLine = -1;
+
+      function mostrarLetra(index) {
+        lyricsContainer.innerHTML = '';
+        const linha = document.createElement('div');
+        linha.className = 'lyrics-line';
+        linha.textContent = lyrics[index].text;
+        lyricsContainer.appendChild(linha);
+      }
+
+      setInterval(() => {
+        if (audio.readyState >= 2) {
+          const tempoAtual = Math.floor(audio.currentTime);
+          const novaLinha = lyrics.findIndex((l, i) =>
+            tempoAtual >= l.time && (i === lyrics.length - 1 || tempoAtual < lyrics[i + 1].time)
+          );
+          if (novaLinha !== currentLine) {
+            currentLine = novaLinha;
+            if (novaLinha !== -1) mostrarLetra(novaLinha);
+          }
+        }
+      }, 500);
 
       // Carrossel
       const carrossel = document.getElementById('carrossel');
