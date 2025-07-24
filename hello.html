@@ -4,8 +4,20 @@
 <head>
   <meta charset="UTF-8">
   <title>Contagem</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
+    /* Wrapper fixo 360×640 */
+    #wrapper {
+      position: absolute;
+      width: 360px;
+      height: 640px;
+      top: 0;
+      left: 0;
+      transform-origin: top left;
+      overflow: hidden;
+      background: #000;
+    }
+
     /* Estilo principal e fundo */
     html,
     body {
@@ -365,6 +377,7 @@
 </head>
 
 <body>
+  <div id="wrapper"></div>
   <div id="topo-texto">"O amor não se alegra com a injustiça,<br>
     mas se alegra com a verdade.<br>
     Tudo sofre, tudo crê, <br>
@@ -405,6 +418,20 @@
   </div>
   </div>
   <script>
+    // escala dinâmica
+    (function () {
+      const DESIGN_W = 360, DESIGN_H = 640;
+      const w = document.getElementById('wrapper');
+      function resize() {
+        const vw = window.innerWidth, vh = window.innerHeight;
+        const s = Math.min(vw / DESIGN_W, vh / DESIGN_H);
+        w.style.transform = `scale(${s})`;
+        w.style.left = `${(vw - DESIGN_W * s) / 2}px`;
+        w.style.top = `${(vh - DESIGN_H * s) / 2}px`;
+      }
+      window.addEventListener('resize', resize);
+      resize();
+    })();
     document.addEventListener('DOMContentLoaded', () => {
       const bg = document.getElementById('bg');
       for (let i = 0; i < 150; i++) {
