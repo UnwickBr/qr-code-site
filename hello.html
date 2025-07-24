@@ -534,15 +534,22 @@
           palavras.forEach((palavra, i) => {
             const span = document.createElement('span');
             span.className = 'lyrics-word';
-            const min = 1.1;
-            const max = 1.8;
-            const tamanho = (Math.random() * (max - min) + min).toFixed(2);
-            span.style.fontSize = `${tamanho}rem`;
             span.style.animationDelay = `${(linhaIndex * 0.6) + i * 0.1}s`;
+
+            // Tamanho aleatório entre 1.0rem e 1.6rem
+            const minSize = 1.0;
+            const maxSize = 1.8;
+            const fontSize = (Math.random() * (maxSize - minSize) + minSize).toFixed(2);
+            span.style.fontSize = `${fontSize}rem`;
+
+            // Peso aleatório: normal ou bold
+            const pesos = ['normal', 'bold'];
+            span.style.fontWeight = pesos[Math.floor(Math.random() * pesos.length)];
+
             span.textContent = palavra;
             linhaDiv.appendChild(span);
 
-            // Adiciona um espaço real entre palavras
+            // Espaço entre palavras
             if (i < palavras.length - 1) {
               linhaDiv.appendChild(document.createTextNode('\u00A0'));
             }
@@ -553,6 +560,7 @@
 
         lyricsContainer.appendChild(linhaPrincipal);
       }
+
 
       setInterval(() => {
         if (audio.readyState >= 2) {
