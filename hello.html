@@ -20,17 +20,16 @@
 
     /* Estilo principal e fundo */
     html,
-    html,
     body {
       margin: 0;
       padding: 0;
       width: 100%;
       height: 100%;
       overflow: hidden;
+      overscroll-behavior: none;
       font-family: Arial, sans-serif;
       color: #fff;
       text-align: center;
-      background: #000;
     }
 
     #bg {
@@ -43,7 +42,6 @@
       z-index: 0;
       overflow: hidden;
     }
-
 
     .estrela,
     .cometa,
@@ -145,38 +143,45 @@
     #app {
       position: relative;
       z-index: 1;
-      width: 100vw;
-      height: 100vh;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
+      width: 100%;
+      height: 100%;
     }
 
-
     #contador-container {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
       z-index: 2;
-      padding-bottom: 10vh;
     }
 
     #foto-com-borda {
-      padding: 2vw;
+      padding: 8px;
       border-radius: 12px;
       background: linear-gradient(45deg, #ffffff, #ffffff00, #ffffff);
       background-size: 600% 600%;
       animation: gradiente 10s ease infinite;
       display: inline-block;
+      padding-bottom: 80px;
     }
 
     @keyframes gradiente {
-      0% { background-position: 0 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0 50%; }
+      0% {
+        background-position: 0 50%
+      }
+
+      50% {
+        background-position: 100% 50%
+      }
+
+      100% {
+        background-position: 0 50%
+      }
     }
 
     .carrossel-container {
-      width: 80vw;
-      max-width: 360px;
+      width: 300px;
+      max-width: 90vw;
       overflow: hidden;
       margin: 0 auto;
       position: relative;
@@ -206,6 +211,7 @@
       height: 8px;
       border-radius: 50%;
       background: #ffffff33;
+      transition: background 0.3s;
     }
 
     .indicadores span.ativo {
@@ -213,7 +219,7 @@
     }
 
     #contador {
-      font-size: clamp(1rem, 2.5vw, 1.4rem);
+      font-size: 1.2rem;
       font-weight: bold;
       background: linear-gradient(90deg, #ffffff, #fff);
       -webkit-background-clip: text;
@@ -224,10 +230,10 @@
 
     #topo-texto {
       position: absolute;
-      top: 2vh;
+      top: 10px;
       width: 100%;
       text-align: center;
-      font-size: clamp(0.6rem, 1.5vw, 1rem);
+      font-size: 0.7rem;
       color: #fff;
       z-index: 10;
       text-shadow: 1px 1px 2px #000;
@@ -238,24 +244,21 @@
     /* Visualizador de áudio fixo */
     #container-visualizador {
       position: absolute;
-      bottom: 10vh;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 90vw;
+      bottom: 60px;
+      left: 0;
+      right: 0;
+      width: 100%;
       max-width: 550px;
-      aspect-ratio: 5 / 4;
+      height: 240px;
+      margin: 0 auto;
       z-index: 3;
       pointer-events: none;
-    }
-
-     #visualizador {
-      width: 100%;
-      height: 100%;
+      will-change: transform;
     }
 
     #lyrics-container {
       position: absolute;
-      bottom: 1vh;
+      bottom: 1%;
       width: 100%;
       z-index: 20;
       pointer-events: none;
@@ -264,17 +267,27 @@
       justify-content: center;
     }
 
+    @font-face {
+      font-family: 'Helvetica-Neue-Condensed-Bold';
+      src: url('Helvetica-Neue-Condensed-Bold.ttf') format('truetype');
+      font-weight: bold;
+    }
+
     .lyrics-line {
-      font-family: 'Helvetica Neue Condensed Bold', 'Anton', sans-serif;
-      background: transparent;
-      padding: 1vh 2vw;
+      font-family: 'Helvetica-Neue-Condensed-Bold', 'Anton', sans-serif;
+      max-width: 100%;
+      background: rgba(0, 0, 0, 0);
+      padding: 16px 24px;
       border-radius: 12px;
-      font-size: clamp(1.2rem, 3vw, 1.6rem);
+      font-size: 1.2rem;
+      /* text-shadow: 6px 6px 6px #000000;*/
       font-weight: 900;
       color: #ffffff;
-      line-height: 1.1;
-      text-align: center;
+      line-height: 0.9;
+      text-align: left;
       text-transform: uppercase;
+      white-space: pre-line;
+      /*box-shadow: 0 4px 16px rgba(0,0,0,0.5);*/
       animation: entradaReels 0.4s ease-out forwards;
       opacity: 0;
       transform: translateY(20px);
@@ -285,10 +298,12 @@
         opacity: 0;
         transform: translateY(20px);
       }
+
       100% {
         opacity: 1;
         transform: translateY(0);
       }
+    }
 
     @media (max-width: 600px) {
       .lyrics-line {
@@ -399,7 +414,7 @@
   </div>
   <!-- Visualizador de áudio -->
   <div id="container-visualizador">
-    <canvas id="visualizador"></canvas>
+    <canvas id="visualizador" width="300" height="240"></canvas>
   </div>
   </div>
   <script>
@@ -619,7 +634,7 @@
 
       // Contador
       function atualizarContador() {
-        const inicio = new Date('2025-06-07T00:00:00');
+        const inicio = new Date('2025-04-30T00:00:00');
         const agora = new Date();
         const diferenca = agora - inicio;
         if (diferenca < 0) {
