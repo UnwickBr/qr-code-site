@@ -365,8 +365,8 @@
 
     @media only screen and (max-width: 600px) {
 
-    /* Visualizador posicionado logo após o contador dentro do container */
-    #container-visualizador { width:80vw; aspect-ratio:300/240; margin-bottom:2vh; }
+    /* Visualizador posicionado via JS */
+    #container-visualizador { position:absolute; left:50%; transform:translateX(-50%); width:80vw; aspect-ratio:300/240; z-index:3; pointer-events:none; }
     }
     
   </style>
@@ -469,19 +469,28 @@
         h.style.color = `rgb(${Math.random() * 255 | 0},${Math.random() * 255 | 0},${Math.random() * 255 | 0})`;
         bg.appendChild(h);
       }
+        // Posiciona o visualizador abaixo do contador
+        const contadorBox = document.getElementById('contador');
+        const vis = document.getElementById('container-visualizador');
+        function posVis() {
+          const rect = contadorBox.getBoundingClientRect();
+          vis.style.top = (rect.bottom + 10) + 'px';
+        }
+        window.addEventListener('resize', posVis);
+        posVis();
 
-      // Visualizador de áudio
-      const audio = document.getElementById('player');
-      audio.volume = 0.5;
-      const canvas = document.getElementById('visualizador');
-      const ctx = canvas.getContext('2d');
-      const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-      const source = audioCtx.createMediaElementSource(audio);
-      const analyser = audioCtx.createAnalyser();
-      analyser.fftSize = 32;
-      source.connect(analyser);
-      analyser.connect(audioCtx.destination);
-      const dataArray = new Uint8Array(analyser.frequencyBinCount);
+        // Visualizador de áudio
+        const audio = document.getElementById('player');
+        audio.volume = 0.5;
+        const canvas = document.getElementById('visualizador');
+        const ctx = canvas.getContext('2d');
+        const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        const source = audioCtx.createMediaElementSource(audio);
+        const analyser = audioCtx.createAnalyser();
+        analyser.fftSize = 32;
+        source.connect(analyser);
+        analyser.connect(audioCtx.destination);
+        const dataArray = new Uint8Array(analyser.frequencyBinCount);
 
       function draw() {
         requestAnimationFrame(draw);
