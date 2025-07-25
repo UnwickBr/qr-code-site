@@ -6,14 +6,14 @@
   <title>Contagem</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
-    /* Wrapper fixo 360×640 */
+    /* Container fixo 360×640 centralizado e escalável */
     #wrapper {
       position: absolute;
+      top: 50%;
+      left: 50%;
       width: 360px;
       height: 640px;
-      top: 0;
-      left: 0;
-      transform-origin: top left;
+      transform-origin: center center;
       overflow: hidden;
       background: #000;
     }
@@ -219,7 +219,7 @@
     }
 
     #contador {
-      font-size: 1.2rem;
+      font-size: 100%;
       font-weight: bold;
       background: linear-gradient(90deg, #ffffff, #fff);
       -webkit-background-clip: text;
@@ -233,7 +233,7 @@
       top: 10px;
       width: 100%;
       text-align: center;
-      font-size: 0.7rem;
+      font-size: 90%;
       color: #fff;
       z-index: 10;
       text-shadow: 1px 1px 2px #000;
@@ -243,17 +243,26 @@
 
     /* Visualizador de áudio fixo */
     #container-visualizador {
+
       position: absolute;
       bottom: 60px;
-      left: 0;
-      right: 0;
+      right: 30px;
       width: 100%;
+      top: calc(contador - 100%);
       max-width: 550px;
       height: 240px;
       margin: 0 auto;
       z-index: 3;
       pointer-events: none;
       will-change: transform;
+      bottom: 60px;
+      left: 30px;
+      width: 80%;
+      /* 80% da largura do wrapper */
+      aspect-ratio: 300/240;
+      /* mantém proporção 5:4 */
+      z-index: 3;
+      pointer-events: none;
     }
 
     #lyrics-container {
@@ -473,6 +482,18 @@
         h.style.color = `rgb(${Math.random() * 255 | 0},${Math.random() * 255 | 0},${Math.random() * 255 | 0})`;
         bg.appendChild(h);
       }
+      // Posicionar visualizador sob o contador
+      const wrapper = document.getElementById('wrapper');
+      const contadorBox = document.getElementById('contador-container');
+      const vis = document.getElementById('container-visualizador');
+      function posicionaVis() {
+        const rect = contadorBox.getBoundingClientRect();
+        const wrapRect = wrapper.getBoundingClientRect();
+        const topPos = rect.top - wrapRect.top + rect.height;
+        vis.style.top = topPos + 'px';
+      }
+      window.addEventListener('resize', posicionaVis);
+      posicionaVis();
 
       // Visualizador de áudio
       const audio = document.getElementById('player');
